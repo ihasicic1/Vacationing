@@ -15,4 +15,11 @@ public class City {
     public void setCity_id(int city_id) {
         this.city_id = city_id;
     }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "city_id=" + city_id +
+                '}';
+    }
 }
