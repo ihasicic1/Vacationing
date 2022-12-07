@@ -14,6 +14,7 @@ public class Customer {
     private char gender;
     private Integer phone_number;
     private String email;
+    private String password;
 
     public int getId() {
         return id;
@@ -63,6 +64,27 @@ public class Customer {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return id == customer.id && gender == customer.gender && Objects.equals(first_name, customer.first_name) && Objects.equals(last_name, customer.last_name) && Objects.equals(phone_number, customer.phone_number) && Objects.equals(email, customer.email) && Objects.equals(password, customer.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, first_name, last_name, gender, phone_number, email, password);
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -72,19 +94,8 @@ public class Customer {
                 ", gender=" + gender +
                 ", phone_number=" + phone_number +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return id == customer.id && gender == customer.gender && Objects.equals(first_name, customer.first_name) && Objects.equals(last_name, customer.last_name) && Objects.equals(phone_number, customer.phone_number) && Objects.equals(email, customer.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, first_name, last_name, gender, phone_number, email);
-    }
 }
