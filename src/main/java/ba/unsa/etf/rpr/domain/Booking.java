@@ -34,5 +34,12 @@ public class Booking {
         this.tour_id = tour_id;
     }
 
-
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "booking_id=" + booking_id +
+                ", ticket_price=" + ticket_price +
+                ", tour_id=" + tour_id +
+                '}';
+    }
 }
