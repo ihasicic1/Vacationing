@@ -11,7 +11,7 @@ public class Customer {
     private int id;
     private String first_name;
     private String last_name;
-    private char gender;
+    private char gender;   // 'M' or 'm' for male and 'F' or 'f' for female
     private Integer phone_number;
     private String email;
     private String password;
