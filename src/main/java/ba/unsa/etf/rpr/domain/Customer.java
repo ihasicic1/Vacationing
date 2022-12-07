@@ -61,6 +61,16 @@ public class Customer {
         this.email = email;
     }
 
-
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", gender=" + gender +
+                ", phone_number=" + phone_number +
+                ", email='" + email + '\'' +
+                '}';
+    }
 
 }
