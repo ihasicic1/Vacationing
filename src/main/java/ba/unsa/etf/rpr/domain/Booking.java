@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.domain;
 
+import java.util.Objects;
+
 /**
  * class that holds info about tour reservations
  * @author Ilhan Hasicic
@@ -41,5 +43,18 @@ public class Booking {
                 ", ticket_price=" + ticket_price +
                 ", tour_id=" + tour_id +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Booking booking = (Booking) o;
+        return booking_id == booking.booking_id && Objects.equals(ticket_price, booking.ticket_price) && Objects.equals(tour_id, booking.tour_id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(booking_id, ticket_price, tour_id);
     }
 }
