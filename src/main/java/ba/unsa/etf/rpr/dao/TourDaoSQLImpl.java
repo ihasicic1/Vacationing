@@ -1,10 +1,10 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.City;
+import ba.unsa.etf.rpr.domain.Customer;
 import ba.unsa.etf.rpr.domain.Tour;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 /**
  * implementation class for TourDao domain bean
@@ -25,7 +25,23 @@ public class TourDaoSQLImpl implements TourDao {
     }
     @Override
     public Tour getById(int id) {
-        return null;
+        String query = "SELECT * FROM Tours WHERE tour_id = ?";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                Tour tour = new Tour();
+                tour.setTour_id(rs.getInt("tour_id"));
+                tour.setCity_id(new CityDaoSQLImpl().getById(rs.getInt("city_id")));
+                rs.close();
+                return tour;
+            }else{
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

@@ -103,14 +103,14 @@ public class CustomerDaoSQLImpl implements CustomerDao{
 
     @Override
     public Customer getById(int id) {
-        String query = "SELECT * FROM Customers WHERE id = ?";
+        String query = "SELECT * FROM Customers WHERE customer_id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                 Customer customer = new Customer();
-                customer.setId(rs.getInt("id"));
+                customer.setId(rs.getInt("customer_id"));
                 customer.setFirst_name(rs.getString("first_name"));
                 customer.setLast_name(rs.getString("last_name"));
                 customer.setGender(rs.getString("gender"));
