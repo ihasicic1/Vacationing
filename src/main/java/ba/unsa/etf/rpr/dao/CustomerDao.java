@@ -4,6 +4,10 @@ import ba.unsa.etf.rpr.domain.Customer;
 
 import java.util.List;
 
+/**
+ * Dao interface for Customer domain bean
+ * @author Ilhan Hasicic
+ */
 public interface CustomerDao extends Dao<Customer>{
     /**
      * returns a customer with given id

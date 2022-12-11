@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.Booking;
+
 import java.util.List;
 
 /**
@@ -10,10 +12,11 @@ import java.util.List;
 public interface Dao<Type> {
     /**
      * get entity from database base on ID
+     *
      * @param id primary key of entity
      * @return Entity from database
      */
-    Type getById(int id);
+    List<Booking> getById(int id);
 
     /**
      * Saves entity into database
