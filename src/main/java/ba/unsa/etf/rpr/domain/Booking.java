@@ -11,7 +11,7 @@ public class Booking {
     private int booking_id;
     private Double ticket_price;
     private Tour tour_id;
-    private int customer_id;
+    private Customer customer_id;
 
     public int getBooking_id() {
         return booking_id;
@@ -37,11 +37,11 @@ public class Booking {
         this.tour_id = tour_id;
     }
 
-    public int getCustomer_id() {
+    public Customer getCustomer_id() {
         return customer_id;
     }
 
-    public void setCustomer_id(int customer_id) {
+    public void setCustomer_id(Customer customer_id) {
         this.customer_id = customer_id;
     }
 

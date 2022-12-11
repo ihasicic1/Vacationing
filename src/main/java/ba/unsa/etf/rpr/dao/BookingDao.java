@@ -10,4 +10,10 @@ import java.util.List;
  */
 public interface BookingDao extends Dao<Booking> {
 
+    /**
+     * method that gives all bookings made by one customer
+     * @param id
+     * @return list of bookings
+     */
+    List<Booking> searchByCustomerId(int id);
 }
