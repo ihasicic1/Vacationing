@@ -22,7 +22,6 @@ public class TourDaoSQLImpl implements TourDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
     @Override
     public Tour getById(int id) {
