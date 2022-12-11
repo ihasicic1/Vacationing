@@ -27,31 +27,6 @@ public class CustomerDaoSQLImpl implements CustomerDao{
     }
 
     @Override
-    public List<Customer> searchByCustomerId(int id) {
-        String query = "SELECT * FROM Customers WHERE customer_id = ?";
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement(query);
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            ArrayList<Customer> customerList = new ArrayList<>();
-            while(rs.next()){
-                Customer c = new Customer();
-                c.setId(rs.getInt("customer_id"));
-                c.setFirst_name(rs.getString("first_name"));
-                c.setLast_name(rs.getString("last_name"));
-                c.setGender(rs.getString("gender"));
-                c.setPhone_number(rs.getString("phone_number"));
-                c.setEmail(rs.getString("email"));
-                c.setPassword(rs.getString("password"));
-                customerList.add(c);
-            }
-            return customerList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
     public List<Customer> searchByFirstName(String firstName) {
         String query = "SELECT * FROM Customers WHERE first_name = ?";
         try {

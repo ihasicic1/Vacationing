@@ -9,12 +9,6 @@ import java.util.List;
  * @author Ilhan Hasicic
  */
 public interface CustomerDao extends Dao<Customer>{
-    /**
-     * returns a customer with given id
-     * @param id
-     * @return list containing one customer
-     */
-    List<Customer> searchByCustomerId(int id);
 
     /**
      * returns all customers with given first name

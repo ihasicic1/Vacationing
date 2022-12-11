@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.domain.Customer;
 import ba.unsa.etf.rpr.domain.Tour;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 /**
  * implementation class for TourDao domain bean
