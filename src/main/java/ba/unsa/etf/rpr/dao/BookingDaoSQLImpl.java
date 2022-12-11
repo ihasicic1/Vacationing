@@ -1,17 +1,30 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Booking;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class BookingDaoSQLImpl implements BookingDao{
     private Connection conn;
+
+    public BookingDaoSQLImpl(Connection conn) throws IOException {
+        FileReader reader = new FileReader("db.properties");
+        Properties p = new Properties();
+        p.load(reader);
+        try {
+            this.conn = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
-    public List<Booking> searchByCustomerId(int id) {
+    public List<Booking> searchByCustomerId(int id) throws IOException {
         String query = "SELECT * FROM Booking WHERE customer_id = ?";
         try {
             PreparedStatement stmt = this.conn.prepareStatement(query);
