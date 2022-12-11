@@ -1,10 +1,13 @@
 package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Tour;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
 /**
  * implementation class for TourDao domain bean
  * @author Ilhan Hasicic
@@ -15,9 +18,12 @@ public class TourDaoSQLImpl implements TourDao {
     /**
      * constructor for connection to the database
      */
-    public TourDaoSQLImpl(){
+    public TourDaoSQLImpl() throws IOException {
+        FileReader reader = new FileReader("db.properties");
+        Properties p = new Properties();
+        p.load(reader);
         try {
-            this.conn = DriverManager.getConnection("url", "username", "password");
+            this.conn = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
