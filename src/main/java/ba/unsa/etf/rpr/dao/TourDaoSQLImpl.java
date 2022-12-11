@@ -10,7 +10,7 @@ import java.util.List;
  * implementation class for TourDao domain bean
  * @author Ilhan Hasicic
  */
-public class TourDaoSQLImpls implements TourDao {
+public class TourDaoSQLImpl implements TourDao {
     private Connection conn;
 
     /**
