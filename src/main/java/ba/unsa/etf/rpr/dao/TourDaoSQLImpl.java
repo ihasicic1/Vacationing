@@ -66,11 +66,6 @@ public class TourDaoSQLImpl implements TourDao {
     }
 
     @Override
-    public List<Tour> searchById(int id) {
-        return null;
-    }
-
-    @Override
     public List<Tour> searchByCity(String name) {
         return null;
     }
