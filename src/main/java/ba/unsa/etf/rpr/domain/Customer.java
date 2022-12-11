@@ -12,11 +12,11 @@ public class Customer {
     private String first_name;
     private String last_name;
     private String gender;   // 'M' or 'm' for male and 'F' or 'f' for female
-    private Integer phone_number;
+    private String phone_number;
     private String email;
     private String password;
 
-    public Customer(int id, String first_name, String last_name, String gender, Integer phone_number, String email, String password) {
+    public Customer() {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -59,11 +59,11 @@ public class Customer {
         this.gender = gender;
     }
 
-    public Integer getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(Integer phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 

@@ -1,9 +1,9 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.Booking;
 import ba.unsa.etf.rpr.domain.Customer;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,14 +13,14 @@ import java.util.List;
 
 public class CustomerDaoSQLImpl implements CustomerDao{
     private Connection conn;
-    private String url = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7583349";
+
 
     /**
      * constructor for connection to the database
      */
     public CustomerDaoSQLImpl(){
         try {
-            this.conn = DriverManager.getConnection(url, "username", "password");
+            this.conn = DriverManager.getConnection("url", "username", "password");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -42,7 +42,29 @@ public class CustomerDaoSQLImpl implements CustomerDao{
     }
 
     @Override
-    public List<Booking> getById(int id) {
+    public Customer getById(int id) {
+        String query = "SELECT * FROM Customers WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                Customer customer = new Customer();
+                customer.setId(rs.getInt("id");
+                customer.setFirst_name(rs.getString("first_name"));
+                customer.setLast_name(rs.getString("last_name"));
+                customer.setGender(rs.getString("gender"));
+                customer.setPhone_number(rs.getString("phone_number"));
+                customer.setEmail(rs.getString("email"));
+                customer.setPassword(rs.getString("password"));
+                rs.close();
+                return customer;
+            }else{
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 

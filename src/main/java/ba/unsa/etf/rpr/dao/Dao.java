@@ -16,7 +16,7 @@ public interface Dao<Type> {
      * @param id primary key of entity
      * @return Entity from database
      */
-    List<Booking> getById(int id);
+    Type getById(int id);
 
     /**
      * Saves entity into database
