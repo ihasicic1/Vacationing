@@ -24,8 +24,8 @@ public class CustomerDaoSQLImpl implements CustomerDao{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
+
     @Override
     public List<Customer> searchByCustomerId(int id) {
         String query = "SELECT * FROM Customers WHERE customer_id = ?";

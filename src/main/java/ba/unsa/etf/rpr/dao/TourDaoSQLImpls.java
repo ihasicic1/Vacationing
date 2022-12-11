@@ -6,10 +6,24 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
-
+/**
+ * implementation class for TourDao domain bean
+ * @author Ilhan Hasicic
+ */
 public class TourDaoSQLImpls implements TourDao {
     private Connection conn;
 
+    /**
+     * constructor for connection to the database
+     */
+    public TourDaoSQLImpl(){
+        try {
+            this.conn = DriverManager.getConnection("url", "username", "password");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     @Override
     public Tour getById(int id) {
         return null;
