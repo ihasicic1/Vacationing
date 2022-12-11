@@ -1,16 +1,27 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.City;
-import ba.unsa.etf.rpr.domain.Tour;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.*;
 import java.util.List;
+import java.util.Properties;
 
 public class CityDaoSQLImpl implements CityDao{
     private Connection conn;
+
+    public CityDaoSQLImpl() throws IOException {
+        FileReader reader = new FileReader("db.properties");
+        Properties p = new Properties();
+        p.load(reader);
+        try {
+            this.conn = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public City getById(int id) {
         String query = "SELECT * FROM Cities WHERE city_id = ?";

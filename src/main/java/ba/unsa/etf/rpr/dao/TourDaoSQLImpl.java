@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Tour;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class TourDaoSQLImpl implements TourDao {
             }else{
                 return null;
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -77,7 +78,7 @@ public class TourDaoSQLImpl implements TourDao {
                 tourList.add(t);
             }
             return tourList;
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
