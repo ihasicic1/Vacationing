@@ -1,5 +1,4 @@
 package ba.unsa.etf.rpr.dao;
-import ba.unsa.etf.rpr.domain.Customer;
 import ba.unsa.etf.rpr.domain.Tour;
 
 import java.sql.*;
