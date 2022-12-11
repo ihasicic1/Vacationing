@@ -14,7 +14,7 @@ public interface CustomerDao extends Dao<Customer>{
      * @param id
      * @return list containing one customer
      */
-    List<Customer> searchById(int id);
+    List<Customer> searchByCustomerId(int id);
 
     /**
      * returns all customers with given first name
