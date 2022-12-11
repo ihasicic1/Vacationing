@@ -12,7 +12,7 @@ import java.util.Properties;
 public class BookingDaoSQLImpl implements BookingDao{
     private Connection conn;
 
-    public BookingDaoSQLImpl(Connection conn) throws IOException {
+    public BookingDaoSQLImpl() throws IOException {
         FileReader reader = new FileReader("db.properties");
         Properties p = new Properties();
         p.load(reader);
