@@ -2,7 +2,6 @@ package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Customer;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -111,11 +110,20 @@ public class CustomerDaoSQLImpl implements CustomerDao{
 
     @Override
     public Customer add(Customer item) {
-        return null;
+        try {
+            PreparedStatement stmt =
+                    this.conn.prepareStatement("INSERT INTO Customers (customer_id, first_name, last_name, gender, phone_number, email, password) " +
+                            "VALUES (item.getId(), item.getFirst_name(), item.getLast_name(), item.getGender(), item.getPhone_number(), item.getEmail(), item.getPassword())");//ako je auto-increment, customer_id ce se sam povecati
+            stmt.executeUpdate();
+            return item;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public Customer update(Customer item) {
+
         return null;
     }
 
