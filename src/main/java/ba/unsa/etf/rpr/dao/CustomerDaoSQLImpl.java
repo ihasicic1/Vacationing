@@ -28,7 +28,8 @@ public class CustomerDaoSQLImpl implements CustomerDao{
         try {
             this.conn = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -53,8 +54,10 @@ public class CustomerDaoSQLImpl implements CustomerDao{
             }
             return customerList;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @Override
@@ -78,8 +81,10 @@ public class CustomerDaoSQLImpl implements CustomerDao{
             }
             return customerList;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @Override
@@ -104,8 +109,10 @@ public class CustomerDaoSQLImpl implements CustomerDao{
                 return null;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @Override
@@ -117,13 +124,29 @@ public class CustomerDaoSQLImpl implements CustomerDao{
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     @Override
     public Customer update(Customer item) {
-
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Customers SET customer_id = ?, first_name = ?, last_name = ?, gender = ?, phone_number = ?, email = ?, password = ?");
+            stmt.setInt(1, item.getId());
+            stmt.setString(2, item.getFirst_name());
+            stmt.setString(3, item.getLast_name());
+            stmt.setString(4, item.getGender());
+            stmt.setString(5, item.getPhone_number());
+            stmt.setString(6, item.getEmail());
+            stmt.setString(7, item.getPassword());
+            stmt.executeUpdate();
+            return item;
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
