@@ -83,6 +83,7 @@ public class TourDaoSQLImpl implements TourDao {
                 t.setCity_id(new CityDaoSQLImpl().getById(rs.getInt("city_id")));
                 tourList.add(t);
             }
+            rs.close();
             return tourList;
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);

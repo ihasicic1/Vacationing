@@ -39,6 +39,7 @@ public class BookingDaoSQLImpl implements BookingDao{
                 b.setCustomer_id(new CustomerDaoSQLImpl().getById(rs.getInt("customer_id")));
                 bookingList.add(b);
             }
+            rs.close();
             return bookingList;
         } catch (SQLException e) {
             throw new RuntimeException(e);

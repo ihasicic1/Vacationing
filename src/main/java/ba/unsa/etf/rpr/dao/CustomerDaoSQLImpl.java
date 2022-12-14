@@ -52,6 +52,7 @@ public class CustomerDaoSQLImpl implements CustomerDao{
                 c.setPassword(rs.getString("password"));
                 customerList.add(c);
             }
+            rs.close();
             return customerList;
         } catch (SQLException e) {
             System.out.println("Problem pri radu sa bazom podataka");
@@ -79,6 +80,7 @@ public class CustomerDaoSQLImpl implements CustomerDao{
                 c.setPassword(rs.getString("password"));
                 customerList.add(c);
             }
+            rs.close();
             return customerList;
         } catch (SQLException e) {
             System.out.println("Problem pri radu sa bazom podataka");
