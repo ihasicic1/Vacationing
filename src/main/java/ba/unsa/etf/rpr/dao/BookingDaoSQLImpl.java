@@ -76,6 +76,15 @@ public class BookingDaoSQLImpl implements BookingDao{
 
     @Override
     public Booking add(Booking item) {
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Booking (booking_id, ticket_price, tour_id, customer_id) " +
+                    "VALUES (item.getBooking_id, item.getTicket_price(), item.getTour_id(), item.getCustomer_id())");
+            stmt.executeUpdate();
+            return item;
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
