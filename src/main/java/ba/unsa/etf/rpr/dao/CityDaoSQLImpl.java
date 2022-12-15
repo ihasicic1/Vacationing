@@ -12,12 +12,13 @@ import java.util.Properties;
 
 public class CityDaoSQLImpl implements CityDao{
     private Connection conn;
+    private static CityDaoSQLImpl instance = null;
 
     /**
      * constructor for connection to the database
      * @throws IOException
      */
-    public CityDaoSQLImpl() throws IOException {
+    private CityDaoSQLImpl() throws IOException {
         FileReader reader = new FileReader("db.properties");
         Properties p = new Properties();
         p.load(reader);
@@ -26,6 +27,11 @@ public class CityDaoSQLImpl implements CityDao{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static CityDaoSQLImpl getInstance() throws IOException {
+        if(instance == null) instance = new CityDaoSQLImpl();
+        return instance;
     }
 
     @Override
