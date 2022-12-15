@@ -1,5 +1,4 @@
 package ba.unsa.etf.rpr.dao;
-import ba.unsa.etf.rpr.domain.Booking;
 import ba.unsa.etf.rpr.domain.Tour;
 
 import java.io.FileReader;

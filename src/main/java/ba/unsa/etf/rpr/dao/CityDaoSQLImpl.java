@@ -13,6 +13,10 @@ import java.util.Properties;
 public class CityDaoSQLImpl implements CityDao{
     private Connection conn;
 
+    /**
+     * constructor for connection to the database
+     * @throws IOException
+     */
     public CityDaoSQLImpl() throws IOException {
         FileReader reader = new FileReader("db.properties");
         Properties p = new Properties();

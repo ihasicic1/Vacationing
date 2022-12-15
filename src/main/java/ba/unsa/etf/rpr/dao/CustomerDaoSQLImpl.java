@@ -16,12 +16,12 @@ import java.util.Properties;
 
 public class CustomerDaoSQLImpl implements CustomerDao{
     private Connection conn;
-
+    private static CustomerDaoSQLImpl instance = null;
 
     /**
      * constructor for connection to the database
      */
-    public CustomerDaoSQLImpl() throws IOException {
+    private CustomerDaoSQLImpl() throws IOException {
         FileReader reader = new FileReader("db.properties");
         Properties p = new Properties();
         p.load(reader);
@@ -32,6 +32,10 @@ public class CustomerDaoSQLImpl implements CustomerDao{
             System.out.println(e.getMessage());
         }
     }
+     public static CustomerDaoSQLImpl getInstance() throws IOException {
+        if(instance == null) instance = new CustomerDaoSQLImpl();
+        return instance;
+     }
 
     @Override
     public List<Customer> searchByFirstName(String firstName) {

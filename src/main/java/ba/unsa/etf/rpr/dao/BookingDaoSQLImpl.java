@@ -11,6 +11,10 @@ import java.util.Properties;
 public class BookingDaoSQLImpl implements BookingDao{
     private Connection conn;
 
+    /**
+     * constructor for connection to the database
+     * @throws IOException
+     */
     public BookingDaoSQLImpl() throws IOException {
         FileReader reader = new FileReader("db.properties");
         Properties p = new Properties();
@@ -35,7 +39,7 @@ public class BookingDaoSQLImpl implements BookingDao{
                 b.setBooking_id(rs.getInt("booking_id"));
                 b.setTicket_price(rs.getDouble("ticket_price"));
                 b.setTour_id(new TourDaoSQLImpl().getById(rs.getInt("tour_id")));
-                b.setCustomer_id(new CustomerDaoSQLImpl().getById(rs.getInt("customer_id")));
+                b.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt("customer_id")));
                 bookingList.add(b);
             }
             rs.close();
@@ -57,7 +61,7 @@ public class BookingDaoSQLImpl implements BookingDao{
                 booking.setBooking_id(rs.getInt("id"));
                 booking.setTicket_price(rs.getDouble("ticket_price"));
                 booking.setTour_id(new TourDaoSQLImpl().getById(rs.getInt("tour_id")));
-                booking.setCustomer_id(new CustomerDaoSQLImpl().getById(rs.getInt("customer_id")));
+                booking.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt("customer_id")));
                 rs.close();
                 return booking;
             }else{
@@ -127,7 +131,7 @@ public class BookingDaoSQLImpl implements BookingDao{
                 booking.setBooking_id(rs.getInt(1));
                 booking.setTicket_price(rs.getDouble(2));
                 booking.setTour_id(new TourDaoSQLImpl().getById(rs.getInt(3)));
-                booking.setCustomer_id(new CustomerDaoSQLImpl().getById(rs.getInt(4)));
+                booking.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt(4)));
                 bookingList.add(booking);
             }
             rs.close();
