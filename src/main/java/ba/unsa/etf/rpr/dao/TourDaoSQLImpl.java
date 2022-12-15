@@ -1,4 +1,5 @@
 package ba.unsa.etf.rpr.dao;
+import ba.unsa.etf.rpr.domain.Booking;
 import ba.unsa.etf.rpr.domain.Tour;
 
 import java.io.FileReader;
@@ -91,7 +92,22 @@ public class TourDaoSQLImpl implements TourDao {
 
     @Override
     public List<Tour> getAll() {
-        return null;
+        List<Tour> tourList = new ArrayList();
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM Tours");
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Tour tour = new Tour();
+                tour.setTour_id(rs.getInt(1));
+                tour.setCity_id(new CityDaoSQLImpl().getById(rs.getInt(2)));
+                tourList.add(tour);
+            }
+            rs.close();
+        } catch (SQLException | IOException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
+        return tourList;
     }
 
     @Override
