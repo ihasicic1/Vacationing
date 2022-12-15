@@ -90,12 +90,34 @@ public class BookingDaoSQLImpl implements BookingDao{
 
     @Override
     public Booking update(Booking item) {
+
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Booking SET booking_id = ?, ticket_price = ?, tour_id = ?, customer_id = ?");
+            stmt.setInt(1, item.getBooking_id());
+            stmt.setDouble(2, item.getTicket_price());
+            //stmt.setInt(3, item.getTour_id().getTour_id());
+            stmt.setObject(3, item.getTour_id());
+            //stmt.setInt(4, item.getCustomer_id().getId());
+            stmt.setObject(4, item.getCustomer_id());
+            stmt.executeUpdate();
+            return item;
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
     @Override
     public void delete(int id) {
-
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Booking WHERE booking_id = ?");
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
