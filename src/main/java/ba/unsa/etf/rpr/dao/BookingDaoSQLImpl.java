@@ -10,12 +10,13 @@ import java.util.Properties;
 
 public class BookingDaoSQLImpl implements BookingDao{
     private Connection conn;
+    private static BookingDaoSQLImpl instance = null;
 
     /**
      * constructor for connection to the database
      * @throws IOException
      */
-    public BookingDaoSQLImpl() throws IOException {
+    private BookingDaoSQLImpl() throws IOException {
         FileReader reader = new FileReader("db.properties");
         Properties p = new Properties();
         p.load(reader);
@@ -24,6 +25,11 @@ public class BookingDaoSQLImpl implements BookingDao{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static BookingDaoSQLImpl getInstance() throws IOException {
+        if(instance == null) instance = new BookingDaoSQLImpl();
+        return instance;
     }
 
     @Override
