@@ -51,6 +51,14 @@ public class TourDaoSQLImpl implements TourDao {
 
     @Override
     public Tour add(Tour item) {
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Tours (tour_id, city_id) VALUES (item.getTour_id(), item.getCity_id())");
+            stmt.executeUpdate();
+            return item;
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
