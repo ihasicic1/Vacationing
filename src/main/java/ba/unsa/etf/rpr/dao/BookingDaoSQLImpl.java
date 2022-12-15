@@ -44,7 +44,7 @@ public class BookingDaoSQLImpl implements BookingDao{
                 Booking b = new Booking();
                 b.setBooking_id(rs.getInt("booking_id"));
                 b.setTicket_price(rs.getDouble("ticket_price"));
-                b.setTour_id(new TourDaoSQLImpl().getById(rs.getInt("tour_id")));
+                b.setTour_id(TourDaoSQLImpl.getInstance().getById(rs.getInt("tour_id")));
                 b.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt("customer_id")));
                 bookingList.add(b);
             }
@@ -66,7 +66,7 @@ public class BookingDaoSQLImpl implements BookingDao{
                 Booking booking = new Booking();
                 booking.setBooking_id(rs.getInt("id"));
                 booking.setTicket_price(rs.getDouble("ticket_price"));
-                booking.setTour_id(new TourDaoSQLImpl().getById(rs.getInt("tour_id")));
+                booking.setTour_id(TourDaoSQLImpl.getInstance().getById(rs.getInt("tour_id")));
                 booking.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt("customer_id")));
                 rs.close();
                 return booking;
@@ -136,7 +136,7 @@ public class BookingDaoSQLImpl implements BookingDao{
                 Booking booking = new Booking();
                 booking.setBooking_id(rs.getInt(1));
                 booking.setTicket_price(rs.getDouble(2));
-                booking.setTour_id(new TourDaoSQLImpl().getById(rs.getInt(3)));
+                booking.setTour_id(TourDaoSQLImpl.getInstance().getById(rs.getInt(3)));
                 booking.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt(4)));
                 bookingList.add(booking);
             }
