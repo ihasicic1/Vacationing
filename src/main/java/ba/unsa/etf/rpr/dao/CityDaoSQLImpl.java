@@ -45,6 +45,14 @@ public class CityDaoSQLImpl implements CityDao{
 
     @Override
     public City add(City item) {
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Cities (city_id, city_name) VALUES (item.getCity_id(), item.getCity_name())");
+            stmt.executeUpdate();
+            return item;
+        } catch (SQLException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
