@@ -14,11 +14,12 @@ import java.util.Properties;
  */
 public class TourDaoSQLImpl implements TourDao {
     private Connection conn;
+    private static TourDaoSQLImpl instance = null;
 
     /**
      * constructor for connection to the database
      */
-    public TourDaoSQLImpl() throws IOException {
+    private TourDaoSQLImpl() throws IOException {
         FileReader reader = new FileReader("db.properties");
         Properties p = new Properties();
         p.load(reader);
@@ -27,6 +28,11 @@ public class TourDaoSQLImpl implements TourDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static TourDaoSQLImpl getInstance() throws IOException {
+        if(instance == null) instance = new TourDaoSQLImpl();
+        return instance;
     }
     @Override
     public Tour getById(int id) {
