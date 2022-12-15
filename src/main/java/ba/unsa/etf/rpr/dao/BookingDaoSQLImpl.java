@@ -122,6 +122,23 @@ public class BookingDaoSQLImpl implements BookingDao{
 
     @Override
     public List<Booking> getAll() {
-        return null;
+        List<Booking> bookingList = new ArrayList();
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM Booking");
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Booking booking = new Booking();
+                booking.setBooking_id(rs.getInt(1));
+                booking.setTicket_price(rs.getDouble(2));
+                booking.setTour_id(new TourDaoSQLImpl().getById(rs.getInt(3)));
+                booking.setCustomer_id(new CustomerDaoSQLImpl().getById(rs.getInt(4)));
+                bookingList.add(booking);
+            }
+            rs.close();
+        } catch (SQLException | IOException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
+        return bookingList;
     }
 }
