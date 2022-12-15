@@ -1,7 +1,10 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Booking;
+import ba.unsa.etf.rpr.domain.Customer;
+import ba.unsa.etf.rpr.domain.Tour;
 
+import java.awt.print.Book;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -48,6 +51,26 @@ public class BookingDaoSQLImpl implements BookingDao{
 
     @Override
     public Booking getById(int id) {
+        String query = "SELECT * FROM Booking WHERE booking_id = ?";
+        try{
+            PreparedStatement stmt = this.conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                Booking booking = new Booking();
+                booking.setBooking_id(rs.getInt("id"));
+                booking.setTicket_price(rs.getDouble("ticket_price"));
+                booking.setTour_id(new TourDaoSQLImpl().getById(rs.getInt("tour_id")));
+                booking.setCustomer_id(new CustomerDaoSQLImpl().getById(rs.getInt("customer_id")));
+                rs.close();
+                return booking;
+            }else{
+                return null;
+            }
+        } catch (SQLException | IOException e) {
+            System.out.println("Problem pri radu sa bazom podataka");
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
