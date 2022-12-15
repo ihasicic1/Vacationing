@@ -44,7 +44,7 @@ public class TourDaoSQLImpl implements TourDao {
             if(rs.next()){
                 Tour tour = new Tour();
                 tour.setTour_id(rs.getInt("tour_id"));
-                tour.setCity_id(new CityDaoSQLImpl().getById(rs.getInt("city_id")));
+                tour.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt("city_id")));
                 rs.close();
                 return tour;
             }else{
@@ -104,7 +104,7 @@ public class TourDaoSQLImpl implements TourDao {
             while(rs.next()){
                 Tour tour = new Tour();
                 tour.setTour_id(rs.getInt(1));
-                tour.setCity_id(new CityDaoSQLImpl().getById(rs.getInt(2)));
+                tour.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt(2)));
                 tourList.add(tour);
             }
             rs.close();
@@ -126,7 +126,7 @@ public class TourDaoSQLImpl implements TourDao {
             while(rs.next()){
                 Tour t = new Tour();
                 t.setTour_id(rs.getInt("tour_id"));
-                t.setCity_id(new CityDaoSQLImpl().getById(rs.getInt("city_id")));
+                t.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt("city_id")));
                 tourList.add(t);
             }
             rs.close();
