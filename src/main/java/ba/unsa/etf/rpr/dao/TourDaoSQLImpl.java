@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
+
 /**
  * implementation class for TourDao domain bean
  * @author Ilhan Hasicic
@@ -58,8 +60,12 @@ public class TourDaoSQLImpl implements TourDao {
     @Override
     public Tour add(Tour item) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Tours (tour_id, city_id) VALUES (item.getTour_id(), item.getCity_id())");
+            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Tours(city_id) VALUES(?)", RETURN_GENERATED_KEYS);
+            stmt.setInt(1, item.getCity_id().getCity_id());
             stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            item.setTour_id(rs.getInt(1));
             return item;
         } catch (SQLException e) {
             System.out.println("Problem pri radu sa bazom podataka");
