@@ -58,8 +58,13 @@ public class CityDaoSQLImpl implements CityDao{
     @Override
     public City add(City item) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Cities (city_id, city_name) VALUES (item.getCity_id(), item.getCity_name())");
+            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Cities(city_name) VALUES(?)", Statement.RETURN_GENERATED_KEYS);
+            //stmt.setInt(1, item.getCity_id());
+            stmt.setString(1, item.getCity_name());
             stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            item.setCity_id(rs.getInt(1));
             return item;
         } catch (SQLException e) {
             System.out.println("Problem pri radu sa bazom podataka");
