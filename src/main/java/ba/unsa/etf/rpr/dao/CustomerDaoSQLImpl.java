@@ -47,7 +47,7 @@ public class CustomerDaoSQLImpl implements CustomerDao{
             ArrayList<Customer> customerList = new ArrayList<>();
             while(rs.next()){
                 Customer c = new Customer();
-                c.setId(rs.getInt("customer_id"));
+                c.setId(rs.getInt("id"));
                 c.setFirst_name(rs.getString("first_name"));
                 c.setLast_name(rs.getString("last_name"));
                 c.setGender(rs.getString("gender"));
@@ -75,7 +75,7 @@ public class CustomerDaoSQLImpl implements CustomerDao{
             ArrayList<Customer> customerList = new ArrayList<>();
             while(rs.next()){
                 Customer c = new Customer();
-                c.setId(rs.getInt("customer_id"));
+                c.setId(rs.getInt("id"));
                 c.setFirst_name(rs.getString("first_name"));
                 c.setLast_name(rs.getString("last_name"));
                 c.setGender(rs.getString("gender"));
@@ -95,14 +95,14 @@ public class CustomerDaoSQLImpl implements CustomerDao{
 
     @Override
     public Customer getById(int id) {
-        String query = "SELECT * FROM Customers WHERE customer_id = ?";
+        String query = "SELECT * FROM Customers WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                 Customer customer = new Customer();
-                customer.setId(rs.getInt("customer_id"));
+                customer.setId(rs.getInt("id"));
                 customer.setFirst_name(rs.getString("first_name"));
                 customer.setLast_name(rs.getString("last_name"));
                 customer.setGender(rs.getString("gender"));
@@ -148,7 +148,7 @@ public class CustomerDaoSQLImpl implements CustomerDao{
     @Override
     public Customer update(Customer item) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Customers SET customer_id = ?, first_name = ?, last_name = ?, gender = ?, phone_number = ?, email = ?, password = ?");
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Customers SET id = ?, first_name = ?, last_name = ?, gender = ?, phone_number = ?, email = ?, password = ?");
             stmt.setInt(1, item.getId());
             stmt.setString(2, item.getFirst_name());
             stmt.setString(3, item.getLast_name());
@@ -168,7 +168,7 @@ public class CustomerDaoSQLImpl implements CustomerDao{
     @Override
     public void delete(int id) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Customers WHERE customer_id = ?");
+            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Customers WHERE id = ?");
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -185,7 +185,7 @@ public class CustomerDaoSQLImpl implements CustomerDao{
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 Customer customer = new Customer();
-                customer.setId(rs.getInt("customer_id"));
+                customer.setId(rs.getInt("id"));
                 customer.setFirst_name(rs.getString("first_name"));
                 customer.setLast_name(rs.getString("last_name"));
                 customer.setGender(rs.getString("gender"));
