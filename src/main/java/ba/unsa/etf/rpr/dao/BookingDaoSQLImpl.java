@@ -42,7 +42,7 @@ public class BookingDaoSQLImpl implements BookingDao{
             ArrayList<Booking> bookingList = new ArrayList<>();
             while(rs.next()){
                 Booking b = new Booking();
-                b.setBooking_id(rs.getInt("booking_id"));
+                b.setId(rs.getInt("id"));
                 b.setTicket_price(rs.getDouble("ticket_price"));
                 b.setTour_id(TourDaoSQLImpl.getInstance().getById(rs.getInt("tour_id")));
                 b.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt("customer_id")));
@@ -57,14 +57,14 @@ public class BookingDaoSQLImpl implements BookingDao{
 
     @Override
     public Booking getById(int id) {
-        String query = "SELECT * FROM Booking WHERE booking_id = ?";
+        String query = "SELECT * FROM Booking WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                 Booking booking = new Booking();
-                booking.setBooking_id(rs.getInt("id"));
+                booking.setId(rs.getInt("id"));
                 booking.setTicket_price(rs.getDouble("ticket_price"));
                 booking.setTour_id(TourDaoSQLImpl.getInstance().getById(rs.getInt("tour_id")));
                 booking.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt("customer_id")));
@@ -86,12 +86,12 @@ public class BookingDaoSQLImpl implements BookingDao{
             PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Booking(ticket_price, tour_id, customer_id) " +
                     "VALUES(?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setDouble(1, item.getTicket_price());
-            stmt.setInt(2, item.getTour_id().getTour_id());
+            stmt.setInt(2, item.getTour_id().getId());
             stmt.setInt(3, item.getCustomer_id().getId());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            item.setBooking_id(rs.getInt(1));
+            item.setId(rs.getInt(1));
             return item;
         } catch (SQLException e) {
             System.out.println("Problem pri radu sa bazom podataka");
@@ -104,8 +104,8 @@ public class BookingDaoSQLImpl implements BookingDao{
     public Booking update(Booking item) {
 
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Booking SET booking_id = ?, ticket_price = ?, tour_id = ?, customer_id = ?");
-            stmt.setInt(1, item.getBooking_id());
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Booking SET id = ?, ticket_price = ?, tour_id = ?, customer_id = ? WHERE id = ?");
+            stmt.setInt(1, item.getId());
             stmt.setDouble(2, item.getTicket_price());
             //stmt.setInt(3, item.getTour_id().getTour_id());
             stmt.setObject(3, item.getTour_id());
@@ -123,7 +123,7 @@ public class BookingDaoSQLImpl implements BookingDao{
     @Override
     public void delete(int id) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Booking WHERE booking_id = ?");
+            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Booking WHERE id = ?");
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -140,7 +140,7 @@ public class BookingDaoSQLImpl implements BookingDao{
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 Booking booking = new Booking();
-                booking.setBooking_id(rs.getInt(1));
+                booking.setId(rs.getInt(1));
                 booking.setTicket_price(rs.getDouble(2));
                 booking.setTour_id(TourDaoSQLImpl.getInstance().getById(rs.getInt(3)));
                 booking.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt(4)));
