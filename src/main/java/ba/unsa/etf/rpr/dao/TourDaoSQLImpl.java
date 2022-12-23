@@ -38,14 +38,14 @@ public class TourDaoSQLImpl implements TourDao {
     }
     @Override
     public Tour getById(int id) {
-        String query = "SELECT * FROM Tours WHERE tour_id = ?";
+        String query = "SELECT * FROM Tours WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                 Tour tour = new Tour();
-                tour.setId(rs.getInt("tour_id"));
+                tour.setId(rs.getInt("id"));
                 tour.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt("city_id")));
                 rs.close();
                 return tour;
@@ -77,7 +77,7 @@ public class TourDaoSQLImpl implements TourDao {
     @Override
     public Tour update(Tour item) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Tours SET tour_id = ?, city_id = ?");
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Tours SET id = ?, city_id = ?");
             stmt.setInt(1, item.getId());
             stmt.setObject(2, item.getCity_id());
             stmt.executeUpdate();
@@ -92,7 +92,7 @@ public class TourDaoSQLImpl implements TourDao {
     @Override
     public void delete(int id) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Tours WHERE tour_id = ?");
+            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Tours WHERE id = ?");
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -131,7 +131,7 @@ public class TourDaoSQLImpl implements TourDao {
             ArrayList<Tour> tourList = new ArrayList<>();
             while(rs.next()){
                 Tour t = new Tour();
-                t.setId(rs.getInt("tour_id"));
+                t.setId(rs.getInt("id"));
                 t.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt("city_id")));
                 tourList.add(t);
             }
