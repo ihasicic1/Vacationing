@@ -36,14 +36,14 @@ public class CityDaoSQLImpl implements CityDao{
 
     @Override
     public City getById(int id) {
-        String query = "SELECT * FROM Cities WHERE city_id = ?";
+        String query = "SELECT * FROM Cities WHERE id = ?";
         try{
             PreparedStatement stmt = this.conn.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                 City city = new City();
-                city.setCity_id(rs.getInt("city_id"));
+                city.setId(rs.getInt("id"));
                 city.setCity_name(rs.getString("city_name"));
                 rs.close();
                 return city;
@@ -59,12 +59,11 @@ public class CityDaoSQLImpl implements CityDao{
     public City add(City item) {
         try {
             PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Cities(city_name) VALUES(?)", Statement.RETURN_GENERATED_KEYS);
-            //stmt.setInt(1, item.getCity_id());
             stmt.setString(1, item.getCity_name());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            item.setCity_id(rs.getInt(1));
+            item.setId(rs.getInt(1));
             return item;
         } catch (SQLException e) {
             System.out.println("Problem pri radu sa bazom podataka");
@@ -76,8 +75,8 @@ public class CityDaoSQLImpl implements CityDao{
     @Override
     public City update(City item) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Cities SET city_id = ?, city_name = ?");
-            stmt.setInt(1, item.getCity_id());
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Cities SET id = ?, city_name = ?");
+            stmt.setInt(1, item.getId());
             stmt.setString(2, item.getCity_name());
             stmt.executeUpdate();
             return item;
@@ -91,7 +90,7 @@ public class CityDaoSQLImpl implements CityDao{
     @Override
     public void delete(int id) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Cities WHERE city_id = ?");
+            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Cities WHERE id = ?");
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -108,7 +107,7 @@ public class CityDaoSQLImpl implements CityDao{
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 City city = new City();
-                city.setCity_id(rs.getInt(1));
+                city.setId(rs.getInt(1));
                 city.setCity_name(rs.getString(2));
                 cityList.add(city);
             }
