@@ -45,7 +45,7 @@ public class TourDaoSQLImpl implements TourDao {
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                 Tour tour = new Tour();
-                tour.setTour_id(rs.getInt("tour_id"));
+                tour.setId(rs.getInt("tour_id"));
                 tour.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt("city_id")));
                 rs.close();
                 return tour;
@@ -65,7 +65,7 @@ public class TourDaoSQLImpl implements TourDao {
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            item.setTour_id(rs.getInt(1));
+            item.setId(rs.getInt(1));
             return item;
         } catch (SQLException e) {
             System.out.println("Problem pri radu sa bazom podataka");
@@ -78,7 +78,7 @@ public class TourDaoSQLImpl implements TourDao {
     public Tour update(Tour item) {
         try {
             PreparedStatement stmt = this.conn.prepareStatement("UPDATE Tours SET tour_id = ?, city_id = ?");
-            stmt.setInt(1, item.getTour_id());
+            stmt.setInt(1, item.getId());
             stmt.setObject(2, item.getCity_id());
             stmt.executeUpdate();
             return item;
@@ -109,7 +109,7 @@ public class TourDaoSQLImpl implements TourDao {
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 Tour tour = new Tour();
-                tour.setTour_id(rs.getInt(1));
+                tour.setId(rs.getInt(1));
                 tour.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt(2)));
                 tourList.add(tour);
             }
@@ -131,7 +131,7 @@ public class TourDaoSQLImpl implements TourDao {
             ArrayList<Tour> tourList = new ArrayList<>();
             while(rs.next()){
                 Tour t = new Tour();
-                t.setTour_id(rs.getInt("tour_id"));
+                t.setId(rs.getInt("tour_id"));
                 t.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt("city_id")));
                 tourList.add(t);
             }
