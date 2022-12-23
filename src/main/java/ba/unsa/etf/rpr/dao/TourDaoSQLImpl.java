@@ -77,9 +77,9 @@ public class TourDaoSQLImpl implements TourDao {
     @Override
     public Tour update(Tour item) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Tours SET id = ?, city_id = ?");
-            stmt.setInt(1, item.getId());
-            stmt.setObject(2, item.getCity_id());
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Tours SET city_id = ? WHERE id = ?");
+            stmt.setObject(1, item.getCity_id());
+            stmt.setInt(2, item.getId());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {

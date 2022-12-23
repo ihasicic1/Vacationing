@@ -104,13 +104,13 @@ public class BookingDaoSQLImpl implements BookingDao{
     public Booking update(Booking item) {
 
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Booking SET id = ?, ticket_price = ?, tour_id = ?, customer_id = ? WHERE id = ?");
-            stmt.setInt(1, item.getId());
-            stmt.setDouble(2, item.getTicket_price());
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Booking SET ticket_price = ?, tour_id = ?, customer_id = ? WHERE id = ?");
+            stmt.setDouble(1, item.getTicket_price());
             //stmt.setInt(3, item.getTour_id().getTour_id());
-            stmt.setObject(3, item.getTour_id());
+            stmt.setObject(2, item.getTour_id());
             //stmt.setInt(4, item.getCustomer_id().getId());
-            stmt.setObject(4, item.getCustomer_id());
+            stmt.setObject(3, item.getCustomer_id());
+            stmt.setInt(4, item.getId());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {

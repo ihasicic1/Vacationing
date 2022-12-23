@@ -148,14 +148,14 @@ public class CustomerDaoSQLImpl implements CustomerDao{
     @Override
     public Customer update(Customer item) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Customers SET id = ?, first_name = ?, last_name = ?, gender = ?, phone_number = ?, email = ?, password = ?");
-            stmt.setInt(1, item.getId());
-            stmt.setString(2, item.getFirst_name());
-            stmt.setString(3, item.getLast_name());
-            stmt.setString(4, item.getGender());
-            stmt.setString(5, item.getPhone_number());
-            stmt.setString(6, item.getEmail());
-            stmt.setString(7, item.getPassword());
+            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Customers SET first_name = ?, last_name = ?, gender = ?, phone_number = ?, email = ?, password = ? WHERE id = ?");
+            stmt.setString(1, item.getFirst_name());
+            stmt.setString(2, item.getLast_name());
+            stmt.setString(3, item.getGender());
+            stmt.setString(4, item.getPhone_number());
+            stmt.setString(5, item.getEmail());
+            stmt.setString(6, item.getPassword());
+            stmt.setInt(7, item.getId());
             stmt.executeUpdate();
             return item;
         } catch (SQLException e) {
