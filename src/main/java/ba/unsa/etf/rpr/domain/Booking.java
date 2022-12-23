@@ -8,17 +8,17 @@ import java.util.Objects;
  */
 
 public class Booking {
-    private int booking_id;
+    private int id;
     private Double ticket_price;
     private Tour tour_id;
     private Customer customer_id;
 
-    public int getBooking_id() {
-        return booking_id;
+    public int getId() {
+        return id;
     }
 
-    public void setBooking_id(int booking_id) {
-        this.booking_id = booking_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Double getTicket_price() {
@@ -48,7 +48,7 @@ public class Booking {
     @Override
     public String toString() {
         return "Booking{" +
-                "booking_id=" + booking_id +
+                "booking_id=" + id +
                 ", ticket_price=" + ticket_price +
                 ", tour_id=" + tour_id +
                 '}';
@@ -59,11 +59,11 @@ public class Booking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return booking_id == booking.booking_id && Objects.equals(ticket_price, booking.ticket_price) && Objects.equals(tour_id, booking.tour_id);
+        return id == booking.id && Objects.equals(ticket_price, booking.ticket_price) && Objects.equals(tour_id, booking.tour_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(booking_id, ticket_price, tour_id);
+        return Objects.hash(id, ticket_price, tour_id);
     }
 }
