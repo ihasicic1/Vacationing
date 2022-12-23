@@ -48,7 +48,7 @@ public class Booking {
     @Override
     public String toString() {
         return "Booking{" +
-                "booking_id=" + id +
+                "id=" + id +
                 ", ticket_price=" + ticket_price +
                 ", tour_id=" + tour_id +
                 '}';

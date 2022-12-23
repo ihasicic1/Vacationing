@@ -8,15 +8,15 @@ import java.util.Objects;
  */
 
 public class City {
-    private int city_id;
+    private int id;
     private String city_name;
 
-    public int getCity_id() {
-        return city_id;
+    public int getId() {
+        return id;
     }
 
-    public void setCity_id(int city_id) {
-        this.city_id = city_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCity_name() {
@@ -30,7 +30,7 @@ public class City {
     @Override
     public String toString() {
         return "City{" +
-                "city_id=" + city_id +
+                "id=" + id +
                 ", city_name='" + city_name + '\'' +
                 '}';
     }
@@ -40,11 +40,11 @@ public class City {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return city_id == city.city_id && Objects.equals(city_name, city.city_name);
+        return id == city.id && Objects.equals(city_name, city.city_name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(city_id, city_name);
+        return Objects.hash(id, city_name);
     }
 }

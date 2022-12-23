@@ -61,7 +61,7 @@ public class TourDaoSQLImpl implements TourDao {
     public Tour add(Tour item) {
         try {
             PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Tours(city_id) VALUES(?)", RETURN_GENERATED_KEYS);
-            stmt.setInt(1, item.getCity_id().getCity_id());
+            stmt.setInt(1, item.getCity_id().getId());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
