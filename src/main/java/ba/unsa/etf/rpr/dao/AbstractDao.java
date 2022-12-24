@@ -73,4 +73,21 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
         }
     }
 
+    /**
+     * Utility for query execution that always returns single record
+     * @param query - query that returns a single record
+     * @param params - list of params for sql query
+     * @return Object
+     * @throws MyException in case when object is not found
+     */
+    public Type executeQueryUnique(String query, Object[] params) throws MyException {
+        List<Type> result = executeQuery(query, params);
+        if(result != null && result.size() == 1){
+            return result.get(0);
+        }
+        else{
+            throw new MyException("Object not found");
+        }
+    }
+
 }
