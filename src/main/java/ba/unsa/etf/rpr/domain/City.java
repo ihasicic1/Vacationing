@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author Ilhan Hasicic
  */
 
-public class City {
+public class City implements Idable{
     private int id;
     private String city_name;
 

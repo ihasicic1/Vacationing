@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author Ilhan Hasicic
  */
 
-public class Tour {
+public class Tour implements Idable{
     private int id;
     private City city_id;
 

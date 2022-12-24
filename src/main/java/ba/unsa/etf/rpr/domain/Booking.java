@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author Ilhan Hasicic
  */
 
-public class Booking {
+public class Booking implements Idable {
     private int id;
     private Double ticket_price;
     private Tour tour_id;

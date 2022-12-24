@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author Ilhan Hasicic
  */
 
-public class Customer {
+public class Customer implements Idable{
     private int id;
     private String first_name;
     private String last_name;
