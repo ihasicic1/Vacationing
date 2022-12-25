@@ -1,35 +1,21 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Booking;
+import ba.unsa.etf.rpr.exceptions.MyException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
-public class BookingDaoSQLImpl implements BookingDao{
-    private Connection conn;
-    private static BookingDaoSQLImpl instance = null;
+public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDao{
 
-    /**
-     * constructor for connection to the database
-     * @throws IOException
-     */
-    private BookingDaoSQLImpl() throws IOException {
-        FileReader reader = new FileReader("db.properties");
-        Properties p = new Properties();
-        p.load(reader);
-        try {
-            this.conn = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    public static BookingDaoSQLImpl getInstance() throws IOException {
-        if(instance == null) instance = new BookingDaoSQLImpl();
-        return instance;
+    public BookingDaoSQLImpl() {
+        super("Booking");
     }
 
     @Override
@@ -53,6 +39,16 @@ public class BookingDaoSQLImpl implements BookingDao{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Booking row2object(ResultSet rs) throws MyException {
+        return null;
+    }
+
+    @Override
+    public Map<String, Object> object2row(Booking object) {
+        return null;
     }
 
     @Override
