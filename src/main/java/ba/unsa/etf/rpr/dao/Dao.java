@@ -22,7 +22,7 @@ public interface Dao<Type> {
      * @param item bean for saving to database
      * @return saved item with id field populated
      */
-    Type add(Type item);
+    Type add(Type item) throws MyException;
 
     /**
      * Fully updates entity in database based on id (primary) match.

@@ -44,6 +44,37 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
         return null;
     }
 
+    public Type add(Type item) throws MyException{
+        Map<String, Object> row = object2row(item);
+        Map.Entry<String, String> columns = prepareInsertParts(row);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("INSERT INTO ").append(tableName);
+        builder.append(" (").append(columns.getKey()).append(") ");
+        builder.append("VALUES (").append(columns.getValue()).append(")");
+
+        try{
+            PreparedStatement stmt = getConnection().prepareStatement(builder.toString(), Statement.RETURN_GENERATED_KEYS);
+            // bind params. IMPORTANT treeMap is used to keep columns sorted so params are bind correctly
+            int counter = 1;
+            for (Map.Entry<String, Object> entry: row.entrySet()) {
+                if (entry.getKey().equals("id")) continue; // skip ID
+                stmt.setObject(counter, entry.getValue());
+                counter = counter + 1;
+            }
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next(); // we know that there is one key
+            item.setId(rs.getInt(1)); //set id to return it back */
+
+            return item;
+        }catch (SQLException e){
+            throw new MyException(e.getMessage(), e);
+        }
+    }
+
+
     public Type update(Type item) throws MyException{
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row);
@@ -60,7 +91,7 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
             for (Map.Entry<String, Object> entry: row.entrySet()) {
                 if (entry.getKey().equals("id")) continue; // skip ID
                 stmt.setObject(counter, entry.getValue());
-                counter++;
+                counter = counter + 1;
             }
             stmt.setObject(counter, item.getId());
             stmt.executeUpdate();
