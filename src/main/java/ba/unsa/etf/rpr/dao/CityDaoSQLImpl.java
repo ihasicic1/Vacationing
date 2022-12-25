@@ -20,17 +20,6 @@ public class CityDaoSQLImpl extends AbstractDao<City> implements CityDao{
     }
 
 
-    @Override
-    public void delete(int id) {
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Cities WHERE id = ?");
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-    }
 
     @Override
     public City row2object(ResultSet rs) throws MyException {
