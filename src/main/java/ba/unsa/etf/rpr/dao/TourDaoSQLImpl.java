@@ -34,20 +34,6 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
     }
 
 
-    @Override
-    public Tour update(Tour item) {
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Tours SET city_id = ? WHERE id = ?");
-            stmt.setObject(1, item.getCity_id());
-            stmt.setInt(2, item.getId());
-            stmt.executeUpdate();
-            return item;
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
 
     @Override
     public void delete(int id) {
