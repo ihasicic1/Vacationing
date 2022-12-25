@@ -19,11 +19,16 @@ public class CityDaoSQLImpl extends AbstractDao<City> implements CityDao{
         super("Cities");
     }
 
-
-
     @Override
     public City row2object(ResultSet rs) throws MyException {
-        return null;
+        try{
+            City city = new City();
+            city.setId(rs.getInt(1));
+            city.setCity_name(rs.getString(2));
+            return city;
+        } catch (Exception e){
+            throw new MyException(e.getMessage(), e);
+        }
     }
 
     @Override
