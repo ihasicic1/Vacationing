@@ -3,8 +3,6 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Customer;
 import ba.unsa.etf.rpr.exceptions.MyException;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
