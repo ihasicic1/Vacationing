@@ -51,25 +51,6 @@ public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDa
         return null;
     }
 
-    @Override
-    public Booking update(Booking item) {
-
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Booking SET ticket_price = ?, tour_id = ?, customer_id = ? WHERE id = ?");
-            stmt.setDouble(1, item.getTicket_price());
-            //stmt.setInt(3, item.getTour_id().getTour_id());
-            stmt.setObject(2, item.getTour_id());
-            //stmt.setInt(4, item.getCustomer_id().getId());
-            stmt.setObject(3, item.getCustomer_id());
-            stmt.setInt(4, item.getId());
-            stmt.executeUpdate();
-            return item;
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
 
     @Override
     public void delete(int id) {
