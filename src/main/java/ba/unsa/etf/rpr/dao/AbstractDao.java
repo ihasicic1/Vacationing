@@ -36,6 +36,12 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
         this.connection = connection;
     }
 
+    /**
+     * Method for maping ResultSet into Object
+     * @param rs - result set from database
+     * @return a Bean object for specific table
+     * @throws MyException in case of error with db
+     */
     public abstract Type row2object(ResultSet rs) throws MyException;
 
     /**
