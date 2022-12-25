@@ -1,4 +1,6 @@
 package ba.unsa.etf.rpr.dao;
+import ba.unsa.etf.rpr.exceptions.MyException;
+
 import java.util.List;
 
 /**
@@ -27,7 +29,7 @@ public interface Dao<Type> {
      * @param item - bean to be updated. id must be populated
      * @return updated version of bean
      */
-    Type update(Type item);
+    Type update(Type item) throws MyException;
 
     /**
      * Hard delete of item from database with given id
