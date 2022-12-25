@@ -7,10 +7,7 @@ import ba.unsa.etf.rpr.exceptions.MyException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class CityDaoSQLImpl extends AbstractDao<City> implements CityDao{
 
@@ -33,7 +30,10 @@ public class CityDaoSQLImpl extends AbstractDao<City> implements CityDao{
 
     @Override
     public Map<String, Object> object2row(City object) {
-        return null;
+        Map<String, Object> row = new TreeMap<>();
+        row.put("id", object.getId());
+        row.put("city_name", object.getCity_name());
+        return row;
     }
 
 }
