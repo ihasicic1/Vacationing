@@ -31,23 +31,4 @@ public class CityDaoSQLImpl extends AbstractDao<City> implements CityDao{
         return null;
     }
 
-    @Override
-    public List<City> getAll() {
-        List<City> cityList = new ArrayList();
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM Cities");
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                City city = new City();
-                city.setId(rs.getInt(1));
-                city.setCity_name(rs.getString(2));
-                cityList.add(city);
-            }
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return cityList;
-    }
 }
