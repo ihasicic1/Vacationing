@@ -7,10 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Abstract class that implements core DAO CRUD methods for every entity
@@ -88,6 +85,27 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
         else{
             throw new MyException("Object not found");
         }
+    }
+
+    /**
+     * Accepts Key-Value storage of column names and returns CSV of columns and question marks for insert statement
+     * Example: (id, name, city) ?, ?, ?
+     */
+    private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row){
+        StringBuilder columns = new StringBuilder();
+        StringBuilder questions = new StringBuilder();
+        int counter = 0;
+        for(Map.Entry<String, Object> entry: row.entrySet()){
+            counter = counter + 1;
+            if(entry.getKey().equals("id")) continue; //skip insertion of id due to autoincrement
+            columns.append(entry.getKey());
+            questions.append("?");
+            if(row.size() != counter){
+                columns.append(",");
+                questions.append(",");
+            }
+        }
+        return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
     }
 
 }
