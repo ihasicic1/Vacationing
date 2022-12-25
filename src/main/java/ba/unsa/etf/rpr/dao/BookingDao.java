@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Booking;
+import ba.unsa.etf.rpr.exceptions.MyException;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,5 +17,5 @@ public interface BookingDao extends Dao<Booking> {
      * @param id
      * @return list of bookings
      */
-    List<Booking> searchByCustomerId(int id) throws IOException;
+    List<Booking> searchByCustomerId(int id) throws IOException, MyException;
 }
