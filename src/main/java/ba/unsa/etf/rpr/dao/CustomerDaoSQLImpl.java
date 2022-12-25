@@ -113,29 +113,4 @@ public class CustomerDaoSQLImpl extends AbstractDao<Customer> implements Custome
     }
 
 
-
-    @Override
-    public List<Customer> getAll() {
-        List<Customer> customersList = new ArrayList();
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM Customers");
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                Customer customer = new Customer();
-                customer.setId(rs.getInt("id"));
-                customer.setFirst_name(rs.getString("first_name"));
-                customer.setLast_name(rs.getString("last_name"));
-                customer.setGender(rs.getString("gender"));
-                customer.setPhone_number(rs.getString("phone_number"));
-                customer.setEmail(rs.getString("email"));
-                customer.setPassword(rs.getString("password"));
-                customersList.add(customer);
-            }
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return customersList;
-    }
 }
