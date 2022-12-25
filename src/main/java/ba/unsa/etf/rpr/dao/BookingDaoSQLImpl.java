@@ -43,7 +43,16 @@ public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDa
 
     @Override
     public Booking row2object(ResultSet rs) throws MyException {
-        return null;
+        try{
+            Booking booking = new Booking();
+            booking.setId(rs.getInt(1));
+            booking.setTicket_price(rs.getDouble(2));
+            booking.setTour_id(DaoFactory.tourDao().getById(rs.getInt(3)));
+            booking.setCustomer_id(DaoFactory.customerDao().getById(rs.getInt(4)));
+            return booking;
+        } catch (Exception e) {
+            throw new MyException(e.getMessage(), e);
+        }
     }
 
     @Override
