@@ -51,26 +51,4 @@ public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDa
         return null;
     }
 
-
-    @Override
-    public List<Booking> getAll() {
-        List<Booking> bookingList = new ArrayList();
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM Booking");
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                Booking booking = new Booking();
-                booking.setId(rs.getInt(1));
-                booking.setTicket_price(rs.getDouble(2));
-                booking.setTour_id(TourDaoSQLImpl.getInstance().getById(rs.getInt(3)));
-                booking.setCustomer_id(CustomerDaoSQLImpl.getInstance().getById(rs.getInt(4)));
-                bookingList.add(booking);
-            }
-            rs.close();
-        } catch (SQLException | IOException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return bookingList;
-    }
 }
