@@ -1,41 +1,26 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Customer;
+import ba.unsa.etf.rpr.exceptions.MyException;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * implementation class for CustomerDao domain bean
  * @author Ilhan Hasicic
  */
 
-public class CustomerDaoSQLImpl implements CustomerDao{
-    private Connection conn;
-    private static CustomerDaoSQLImpl instance = null;
+public class CustomerDaoSQLImpl extends AbstractDao<Customer> implements CustomerDao{
 
+    public CustomerDaoSQLImpl() {
+        super("Customers");
+    }
     /**
      * constructor for connection to the database
      */
-    private CustomerDaoSQLImpl() throws IOException {
-        FileReader reader = new FileReader("db.properties");
-        Properties p = new Properties();
-        p.load(reader);
-        try {
-            this.conn = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-    }
-     public static CustomerDaoSQLImpl getInstance() throws IOException {
-        if(instance == null) instance = new CustomerDaoSQLImpl();
-        return instance;
-     }
 
     @Override
     public List<Customer> searchByFirstName(String firstName) {
@@ -92,6 +77,25 @@ public class CustomerDaoSQLImpl implements CustomerDao{
         }
         return null;
     }
+
+    @Override
+    public Customer row2object(ResultSet rs) throws MyException {
+        try {
+            Customer customer = new Customer();
+            customer.setId(rs.getInt(1));
+            customer.setFirst_name(rs.getString(2));
+            customer.setLast_name(rs.getString(3));
+            customer.setGender(rs.getString(4));
+            customer.setPhone_number(rs.getString(5));
+            customer.setEmail(rs.getString(6));
+            customer.setPassword(rs.getString(7));
+            return customer;
+        } catch (Exception e) {
+            throw new MyException(e.getMessage(), e);
+        }
+    }
+
+
 
     @Override
     public Customer getById(int id) {
