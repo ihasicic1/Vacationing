@@ -112,32 +112,6 @@ public class CustomerDaoSQLImpl extends AbstractDao<Customer> implements Custome
         return item;
     }
 
-
-
-    @Override
-    public Customer add(Customer item) {
-        try {
-            PreparedStatement stmt =
-                    this.conn.prepareStatement("INSERT INTO Customers(first_name, last_name, gender, phone_number, email, password) " +
-                            "VALUES(?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);//ako je auto-increment, customer_id ce se sam povecati
-            stmt.setString(1, item.getFirst_name());
-            stmt.setString(2, item.getLast_name());
-            stmt.setString(3, item.getGender());
-            stmt.setString(4, item.getPhone_number());
-            stmt.setString(5, item.getEmail());
-            stmt.setString(6, item.getPassword());
-            stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            item.setId(rs.getInt(1));
-            return item;
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
-
     @Override
     public Customer update(Customer item) {
         try {
