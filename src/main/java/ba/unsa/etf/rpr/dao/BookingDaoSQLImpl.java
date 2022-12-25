@@ -6,10 +6,7 @@ import ba.unsa.etf.rpr.exceptions.MyException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDao{
 
@@ -57,7 +54,12 @@ public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDa
 
     @Override
     public Map<String, Object> object2row(Booking object) {
-        return null;
+        Map<String, Object> item = new TreeMap<>();
+        item.put("id", object.getId());
+        item.put("ticket_price", object.getTicket_price());
+        item.put("tour_id", object.getTour_id());
+        item.put("customer_id", object.getCustomer_id());
+        return item;
     }
 
 }
