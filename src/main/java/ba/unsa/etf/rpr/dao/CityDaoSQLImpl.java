@@ -21,21 +21,6 @@ public class CityDaoSQLImpl extends AbstractDao<City> implements CityDao{
 
 
     @Override
-    public City update(City item) {
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("UPDATE Cities SET city_name = ? WHERE id = ?");
-            stmt.setString(1, item.getCity_name());
-            stmt.setInt(2, item.getId());
-            stmt.executeUpdate();
-            return item;
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
-
-    @Override
     public void delete(int id) {
         try {
             PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Cities WHERE id = ?");
