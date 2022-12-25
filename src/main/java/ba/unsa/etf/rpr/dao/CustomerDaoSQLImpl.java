@@ -112,33 +112,7 @@ public class CustomerDaoSQLImpl extends AbstractDao<Customer> implements Custome
         return item;
     }
 
-    @Override
-    public Customer getById(int id) {
-        String query = "SELECT * FROM Customers WHERE id = ?";
-        try{
-            PreparedStatement stmt = this.conn.prepareStatement(query);
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
-                Customer customer = new Customer();
-                customer.setId(rs.getInt("id"));
-                customer.setFirst_name(rs.getString("first_name"));
-                customer.setLast_name(rs.getString("last_name"));
-                customer.setGender(rs.getString("gender"));
-                customer.setPhone_number(rs.getString("phone_number"));
-                customer.setEmail(rs.getString("email"));
-                customer.setPassword(rs.getString("password"));
-                rs.close();
-                return customer;
-            }else{
-                return null;
-            }
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
+
 
     @Override
     public Customer add(Customer item) {
