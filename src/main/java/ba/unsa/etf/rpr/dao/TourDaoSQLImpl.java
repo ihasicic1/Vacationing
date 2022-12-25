@@ -34,19 +34,6 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
     }
 
 
-
-    @Override
-    public void delete(int id) {
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Tours WHERE id = ?");
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-    }
-
     @Override
     public List<Tour> getAll() {
         List<Tour> tourList = new ArrayList();
