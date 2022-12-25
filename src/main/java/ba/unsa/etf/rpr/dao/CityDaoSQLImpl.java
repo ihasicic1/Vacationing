@@ -19,22 +19,6 @@ public class CityDaoSQLImpl extends AbstractDao<City> implements CityDao{
         super("Cities");
     }
 
-    @Override
-    public City add(City item) {
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("INSERT INTO Cities(city_name) VALUES(?)", Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, item.getCity_name());
-            stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            item.setId(rs.getInt(1));
-            return item;
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
 
     @Override
     public City update(City item) {
