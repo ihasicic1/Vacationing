@@ -33,28 +33,6 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
         return null;
     }
 
-    public
-
-    @Override
-    public Tour getById(int id) {
-        String query = "SELECT * FROM Tours WHERE id = ?";
-        try{
-            PreparedStatement stmt = this.conn.prepareStatement(query);
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()){
-                Tour tour = new Tour();
-                tour.setId(rs.getInt("id"));
-                tour.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt("city_id")));
-                rs.close();
-                return tour;
-            }else{
-                return null;
-            }
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     @Override
     public Tour add(Tour item) {
