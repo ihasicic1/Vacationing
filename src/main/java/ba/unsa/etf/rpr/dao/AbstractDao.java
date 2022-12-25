@@ -108,4 +108,23 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
         return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
     }
 
+    /**
+     * Prepare columns for update statement id=?, name=?, ...
+     * @param row - row to be converted into string
+     * @return String for update statement
+     */
+    private String prepareUpdateParts(Map<String, Object> row){
+        StringBuilder columns = new StringBuilder();
+        int counter = 0;
+        for(Map.Entry<String, Object> entry: row.entrySet()){
+            counter = counter + 1;
+            if(entry.getKey().equals("id")) continue; //skip update of id due to where clause
+            columns.append(entry.getKey()).append("= ?");
+            if(row.size() != counter){
+                columns.append(",");
+            }
+        }
+        return columns.toString();
+    }
+
 }
