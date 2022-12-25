@@ -35,26 +35,6 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
 
 
     @Override
-    public List<Tour> getAll() {
-        List<Tour> tourList = new ArrayList();
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("SELECT * FROM Tours");
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                Tour tour = new Tour();
-                tour.setId(rs.getInt(1));
-                tour.setCity_id(CityDaoSQLImpl.getInstance().getById(rs.getInt(2)));
-                tourList.add(tour);
-            }
-            rs.close();
-        } catch (SQLException | IOException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return tourList;
-    }
-
-    @Override
     public List<Tour> searchByCity(String name) {
         String query = "SELECT * FROM Tours WHERE city_name = ?";
         try {
