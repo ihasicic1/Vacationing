@@ -41,5 +41,5 @@ public interface Dao<Type> {
      * Lists all entities from database. WARNING: Very slow operation because it reads all records.
      * @return List of entities from database
      */
-    List<Type> getAll();
+    List<Type> getAll() throws MyException;
 }

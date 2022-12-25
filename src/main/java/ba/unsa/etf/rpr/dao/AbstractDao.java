@@ -44,6 +44,10 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
         return null;
     }
 
+    public List<Type> getAll() throws MyException{
+        return executeQuery("SELECT * FROM "+ tableName, null);
+    }
+
     public void delete(int id) throws MyException {
         String sql = "DELETE FROM "+tableName+" WHERE id = ?";
         try{
