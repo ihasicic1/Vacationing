@@ -95,7 +95,22 @@ public class CustomerDaoSQLImpl extends AbstractDao<Customer> implements Custome
         }
     }
 
-
+    /**
+     * @param object - object to be mapped
+     * @return map representation of object
+     */
+    @Override
+    public Map<String, Object> object2row(Customer object) {
+        Map<String, Object> item = new TreeMap<>();
+        item.put("id", object.getId());
+        item.put("first_name", object.getFirst_name());
+        item.put("last_name", object.getLast_name());
+        item.put("gender", object.getGender());
+        item.put("phone_number", object.getPhone_number());
+        item.put("email", object.getEmail());
+        item.put("password", object.getPassword());
+        return item;
+    }
 
     @Override
     public Customer getById(int id) {
