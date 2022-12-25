@@ -18,15 +18,24 @@ public class CustomerDaoSQLImpl extends AbstractDao<Customer> implements Custome
     public CustomerDaoSQLImpl() {
         super("Customers");
     }
-    /**
-     * constructor for connection to the database
-     */
 
+    /**
+     *
+     * @param firstName
+     * @return customers with given first name
+     * @throws MyException
+     */
     @Override
     public List<Customer> searchByFirstName(String firstName) throws MyException {
         return executeQuery("SELECT * FROM Customers WHERE first_name = ?", new Object[]{firstName});
     }
 
+    /**
+     *
+     * @param lastName
+     * @return customers with given last name
+     * @throws MyException
+     */
     @Override
     public List<Customer> searchByLastName(String lastName) throws MyException {
         return executeQuery("SELECT * FROM Customers WHERE last_name = ?", new Object[]{lastName});
