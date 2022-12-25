@@ -15,7 +15,7 @@ public interface Dao<Type> {
      * @param id primary key of entity
      * @return Entity from database
      */
-    Type getById(int id);
+    Type getById(int id) throws MyException;
 
     /**
      * Saves entity into database

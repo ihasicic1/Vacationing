@@ -40,8 +40,8 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
 
     public abstract Map<String, Object> object2row(Type object);
 
-    public Type getById(int id){
-        return null;
+    public Type getById(int id) throws MyException{
+        return executeQueryUnique("SELECT * FROM "+this.tableName+" WHERE id = ?", new Object[]{id});
     }
 
     public List<Type> getAll() throws MyException{
