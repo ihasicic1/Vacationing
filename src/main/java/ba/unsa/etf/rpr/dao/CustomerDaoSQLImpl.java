@@ -23,31 +23,8 @@ public class CustomerDaoSQLImpl extends AbstractDao<Customer> implements Custome
      */
 
     @Override
-    public List<Customer> searchByFirstName(String firstName) {
-        String query = "SELECT * FROM Customers WHERE first_name = ?";
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement(query);
-            stmt.setString(1, firstName);
-            ResultSet rs = stmt.executeQuery();
-            ArrayList<Customer> customerList = new ArrayList<>();
-            while(rs.next()){
-                Customer c = new Customer();
-                c.setId(rs.getInt("id"));
-                c.setFirst_name(rs.getString("first_name"));
-                c.setLast_name(rs.getString("last_name"));
-                c.setGender(rs.getString("gender"));
-                c.setPhone_number(rs.getString("phone_number"));
-                c.setEmail(rs.getString("email"));
-                c.setPassword(rs.getString("password"));
-                customerList.add(c);
-            }
-            rs.close();
-            return customerList;
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-        return null;
+    public List<Customer> searchByFirstName(String firstName) throws MyException {
+        return executeQuery("SELECT * FROM Customers WHERE first_name = ?", new Object[]{firstName});
     }
 
     @Override

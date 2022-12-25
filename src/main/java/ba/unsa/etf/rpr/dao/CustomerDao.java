@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Customer;
+import ba.unsa.etf.rpr.exceptions.MyException;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface CustomerDao extends Dao<Customer>{
      * @param firstName
      * @return list of customers
      */
-    List<Customer> searchByFirstName(String firstName);
+    List<Customer> searchByFirstName(String firstName) throws MyException;
 
 
     /**
