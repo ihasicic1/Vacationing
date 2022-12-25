@@ -25,12 +25,19 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
 
     @Override
     public Tour row2object(ResultSet rs) throws MyException {
-        return null;
+        try{
+            Tour tour = new Tour();
+            tour.setId(rs.getInt(1));
+            tour.setCity_id(DaoFactory.cityDao().getById(rs.getInt(2)));
+            return tour;
+        } catch (Exception e) {
+            throw new MyException(e.getMessage(), e);
+        }
     }
 
     @Override
     public Map<String, Object> object2row(Tour object) {
-        return null;
+
     }
 
 
