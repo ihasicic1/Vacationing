@@ -53,18 +53,6 @@ public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDa
 
 
     @Override
-    public void delete(int id) {
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement("DELETE FROM Booking WHERE id = ?");
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("Problem pri radu sa bazom podataka");
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @Override
     public List<Booking> getAll() {
         List<Booking> bookingList = new ArrayList();
         try {
