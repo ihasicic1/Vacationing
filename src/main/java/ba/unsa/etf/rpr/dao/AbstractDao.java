@@ -38,6 +38,11 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
 
     public abstract Type row2object(ResultSet rs) throws MyException;
 
+    /**
+     * Method for maping Object into Map
+     * @param object - a bean object for specific table
+     * @return key, value sorted map object
+     */
     public abstract Map<String, Object> object2row(Type object);
 
     public Type getById(int id) throws MyException{
