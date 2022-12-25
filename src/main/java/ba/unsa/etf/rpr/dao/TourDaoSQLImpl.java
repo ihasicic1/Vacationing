@@ -5,10 +5,7 @@ import ba.unsa.etf.rpr.exceptions.MyException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
@@ -37,7 +34,10 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
 
     @Override
     public Map<String, Object> object2row(Tour object) {
-
+        Map<String, Object> item = new TreeMap<>();
+        item.put("id", object.getId());
+        item.put("city_id", object.getCity_id());
+        return item;
     }
 
 
