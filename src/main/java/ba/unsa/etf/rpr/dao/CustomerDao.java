@@ -24,5 +24,5 @@ public interface CustomerDao extends Dao<Customer>{
      * @param lastName
      * @return list of customers
      */
-    List<Customer> searchByLastName(String lastName);
+    List<Customer> searchByLastName(String lastName) throws MyException;
 }
