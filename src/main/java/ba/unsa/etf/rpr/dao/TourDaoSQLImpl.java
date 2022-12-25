@@ -1,11 +1,13 @@
 package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Tour;
+import ba.unsa.etf.rpr.exceptions.MyException;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
@@ -14,28 +16,25 @@ import static java.sql.Statement.RETURN_GENERATED_KEYS;
  * implementation class for TourDao domain bean
  * @author Ilhan Hasicic
  */
-public class TourDaoSQLImpl implements TourDao {
-    private Connection conn;
-    private static TourDaoSQLImpl instance = null;
+public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
 
-    /**
-     * constructor for connection to the database
-     */
-    private TourDaoSQLImpl() throws IOException {
-        FileReader reader = new FileReader("db.properties");
-        Properties p = new Properties();
-        p.load(reader);
-        try {
-            this.conn = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+    public TourDaoSQLImpl() {
+        super("Tours");
     }
 
-    public static TourDaoSQLImpl getInstance() throws IOException {
-        if(instance == null) instance = new TourDaoSQLImpl();
-        return instance;
+    @Override
+    public Tour row2object(ResultSet rs) throws MyException {
+        return null;
     }
+
+    @Override
+    public Map<String, Object> object2row(Tour object) {
+        return null;
+    }
+
+    public
+
     @Override
     public Tour getById(int id) {
         String query = "SELECT * FROM Tours WHERE id = ?";
