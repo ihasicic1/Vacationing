@@ -35,7 +35,7 @@ public interface Dao<Type> {
      * Hard delete of item from database with given id
      * @param id - primary key of entity
      */
-    void delete(int id);
+    void delete(int id) throws MyException;
 
     /**
      * Lists all entities from database. WARNING: Very slow operation because it reads all records.

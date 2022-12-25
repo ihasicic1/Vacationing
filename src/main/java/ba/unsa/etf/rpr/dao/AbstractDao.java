@@ -44,6 +44,17 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
         return null;
     }
 
+    public void delete(int id) throws MyException {
+        String sql = "DELETE FROM "+tableName+" WHERE id = ?";
+        try{
+            PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, id);
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            throw new MyException(e.getMessage(), e);
+        }
+    }
+
     public Type add(Type item) throws MyException{
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row);
