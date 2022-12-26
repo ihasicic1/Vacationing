@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.City;
 import ba.unsa.etf.rpr.domain.Tour;
 import ba.unsa.etf.rpr.exceptions.MyException;
 
@@ -13,8 +12,8 @@ import java.util.List;
 public interface TourDao extends Dao<Tour>{
     /**
      * returns a tour with given city name
-     * @param name
+     * @param destination
      * @return list of a tour because city = location = tour
      */
-    List<Tour> searchByCity(City city) throws MyException;
+    List<Tour> searchByDestination(String destination) throws MyException;
 }

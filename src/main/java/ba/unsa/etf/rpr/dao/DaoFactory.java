@@ -7,7 +7,6 @@ public class DaoFactory {
     private static final CustomerDao customerDao = new CustomerDaoSQLImpl();
     private static final BookingDao bookingDao = new BookingDaoSQLImpl();
     private static final TourDao tourDao = new TourDaoSQLImpl();
-    private static final CityDao cityDao = new CityDaoSQLImpl();
 
     private DaoFactory(){
 
@@ -25,7 +24,4 @@ public class DaoFactory {
         return tourDao;
     }
 
-    public static CityDao cityDao(){
-        return cityDao;
-    }
 }

@@ -16,8 +16,8 @@ public class SignUpController {
     public void exitAction(ActionEvent actionEvent) {
         Stage stage = (Stage)xButton.getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText("");
-        alert.setContentText("Da li želite izaći?");
+        alert.setHeaderText("Warning");
+        alert.setContentText("Do You want to exit?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get().getButtonData().isDefaultButton())
             stage.close();

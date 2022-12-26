@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -10,8 +11,13 @@ import java.util.Objects;
 public class Booking implements Idable {
     private int id;
     private Double ticket_price;
-    private Tour tour_id;
-    private Customer customer_id;
+
+    private Tour tour;
+
+    private Customer customer;
+
+    private Date date;
+
 
     public int getId() {
         return id;
@@ -29,29 +35,28 @@ public class Booking implements Idable {
         this.ticket_price = ticket_price;
     }
 
-    public Tour getTour_id() {
-        return tour_id;
+    public Tour getTour() {
+        return tour;
     }
 
-    public void setTour_id(Tour tour_id) {
-        this.tour_id = tour_id;
+    public void setTour(Tour tour) {
+        this.tour = tour;
     }
 
-    public Customer getCustomer_id() {
-        return customer_id;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomer_id(Customer customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "id=" + id +
-                ", ticket_price=" + ticket_price +
-                ", tour_id=" + tour_id +
-                '}';
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override
@@ -59,11 +64,22 @@ public class Booking implements Idable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return id == booking.id && Objects.equals(ticket_price, booking.ticket_price) && Objects.equals(tour_id, booking.tour_id);
+        return id == booking.id && Objects.equals(ticket_price, booking.ticket_price) && Objects.equals(tour, booking.tour) && Objects.equals(customer, booking.customer) && Objects.equals(date, booking.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ticket_price, tour_id);
+        return Objects.hash(id, ticket_price, tour, customer, date);
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "id=" + id +
+                ", ticket_price=" + ticket_price +
+                ", tour_id=" + tour +
+                ", customer_id=" + customer +
+                ", date=" + date +
+                '}';
     }
 }

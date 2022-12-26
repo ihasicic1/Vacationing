@@ -15,7 +15,7 @@ public interface BookingDao extends Dao<Booking> {
 
     /**
      * method that gives all bookings made by one customer
-     * @param id
+     * @param customer
      * @return list of bookings
      */
     List<Booking> searchByCustomer(Customer customer) throws IOException, MyException;
