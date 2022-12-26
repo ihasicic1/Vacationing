@@ -10,6 +10,8 @@ import java.util.Optional;
 
 public class SignUpController {
     public Button xButton;
+    public Button minimizeButton;
+
 
     public void exitAction(ActionEvent actionEvent) {
         Stage stage = (Stage)xButton.getScene().getWindow();
@@ -19,5 +21,13 @@ public class SignUpController {
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get().getButtonData().isDefaultButton())
             stage.close();
+    }
+
+    public void minimizeAction(ActionEvent actionEvent) {
+
+        Stage stage = (Stage)minimizeButton.getScene().getWindow();
+        minimizeButton.setOnAction(e -> {
+            ((Stage)((Button)e.getSource()).getScene().getWindow()).setIconified(true);
+        });
     }
 }
