@@ -1,4 +1,5 @@
 package ba.unsa.etf.rpr.dao;
+import ba.unsa.etf.rpr.domain.City;
 import ba.unsa.etf.rpr.domain.Tour;
 import ba.unsa.etf.rpr.exceptions.MyException;
 
@@ -25,7 +26,7 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
         try{
             Tour tour = new Tour();
             tour.setId(rs.getInt(1));
-            tour.setCity_id(DaoFactory.cityDao().getById(rs.getInt(2)));
+            tour.setCity(DaoFactory.cityDao().getById(rs.getInt(2)));
             return tour;
         } catch (Exception e) {
             throw new MyException(e.getMessage(), e);
@@ -36,13 +37,13 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
     public Map<String, Object> object2row(Tour object) {
         Map<String, Object> item = new TreeMap<>();
         item.put("id", object.getId());
-        item.put("city_id", object.getCity_id());
+        item.put("city_id", object.getCity().getId());
         return item;
     }
 
 
     @Override
-    public List<Tour> searchByCity(String name) throws MyException {
-        return executeQuery("SELECT * FROM Tours WHERE city_name = ?", new Object[]{name});
+    public List<Tour> searchByCity(City city) throws MyException {
+        return executeQuery("SELECT * FROM Tours WHERE city_name = ?", new Object[]{city.getCity_name()});
     }
 }

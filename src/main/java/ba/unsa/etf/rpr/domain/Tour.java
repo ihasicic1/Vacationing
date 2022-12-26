@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class Tour implements Idable{
     private int id;
-    private City city_id;
+    private City city;
 
     public int getId() {
         return id;
@@ -19,12 +19,12 @@ public class Tour implements Idable{
         this.id = id;
     }
 
-    public City getCity_id() {
-        return city_id;
+    public City getCity() {
+        return city;
     }
 
-    public void setCity_id(City city_id) {
-        this.city_id = city_id;
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override
@@ -32,11 +32,11 @@ public class Tour implements Idable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
-        return id == tour.id && Objects.equals(city_id, tour.city_id);
+        return id == tour.id && Objects.equals(city, tour.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, city_id);
+        return Objects.hash(id, city);
     }
 }

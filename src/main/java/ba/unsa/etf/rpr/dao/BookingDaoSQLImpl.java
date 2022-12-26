@@ -27,8 +27,9 @@ public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDa
             Booking booking = new Booking();
             booking.setId(rs.getInt(1));
             booking.setTicket_price(rs.getDouble(2));
-            booking.setTour_id(DaoFactory.tourDao().getById(rs.getInt(3)));
-            booking.setCustomer_id(DaoFactory.customerDao().getById(rs.getInt(4)));
+            booking.setTour(DaoFactory.tourDao().getById(rs.getInt(3)));
+            booking.setCustomer(DaoFactory.customerDao().getById(rs.getInt(4)));
+            booking.setDate(rs.getDate(5));
             return booking;
         } catch (Exception e) {
             throw new MyException(e.getMessage(), e);
@@ -40,8 +41,9 @@ public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDa
         Map<String, Object> item = new TreeMap<>();
         item.put("id", object.getId());
         item.put("ticket_price", object.getTicket_price());
-        item.put("tour_id", object.getTour_id());
-        item.put("customer_id", object.getCustomer_id());
+        item.put("tour_id", object.getTour().getId());
+        item.put("customer_id", object.getCustomer().getId());
+        item.put("date", object.getDate());
         return item;
     }
 
