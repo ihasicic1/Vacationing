@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Booking;
+import ba.unsa.etf.rpr.domain.Customer;
 import ba.unsa.etf.rpr.exceptions.MyException;
 
 import java.io.FileReader;
@@ -16,8 +17,8 @@ public class BookingDaoSQLImpl extends AbstractDao<Booking> implements BookingDa
     }
 
     @Override
-    public List<Booking> searchByCustomerId(int id) throws MyException {
-        return executeQuery("SELECT * FROM Booking WHERE customer_id = ?", new Object[]{id});
+    public List<Booking> searchByCustomer(Customer customer) throws MyException {
+        return executeQuery("SELECT * FROM Booking WHERE customer_id = ?", new Object[]{customer.getId()});
     }
 
     @Override
