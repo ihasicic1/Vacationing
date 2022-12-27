@@ -4,6 +4,8 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Customer;
 import ba.unsa.etf.rpr.exceptions.MyException;
 
+import java.util.List;
+
 /**
  * Business Logic Layer for Customers
  */
@@ -23,6 +25,10 @@ public class CustomerManager {
 
     public void delete(int id) throws MyException {
         DaoFactory.customerDao().delete(id);
+    }
+
+    public List<Customer> getAll() throws MyException {
+        return DaoFactory.customerDao().getAll();
     }
 
 }
