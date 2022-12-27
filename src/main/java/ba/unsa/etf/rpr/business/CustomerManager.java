@@ -15,6 +15,10 @@ public class CustomerManager {
         return DaoFactory.customerDao().searchByFirstName(firstName);
     }
 
+    public List<Customer> searchCustomersByLastName(String lastName) throws MyException {
+        return DaoFactory.customerDao().searchByLastName(lastName);
+    }
+
     public Customer getById(int id) throws MyException {
         return DaoFactory.customerDao().getById(id);
     }
