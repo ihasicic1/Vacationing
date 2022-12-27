@@ -12,4 +12,8 @@ public class CustomerManager {
     public Customer getById(int id) throws MyException {
         return DaoFactory.customerDao().getById(id);
     }
+
+    public Customer add(Customer customer) throws MyException {
+        return DaoFactory.customerDao().add(customer);
+    }
 }
