@@ -11,6 +11,10 @@ import java.util.List;
  */
 public class CustomerManager {
 
+    public List<Customer> searchCustomersByFirstName(String firstName) throws MyException {
+        return DaoFactory.customerDao().searchByFirstName(firstName);
+    }
+
     public Customer getById(int id) throws MyException {
         return DaoFactory.customerDao().getById(id);
     }
@@ -30,5 +34,7 @@ public class CustomerManager {
     public List<Customer> getAll() throws MyException {
         return DaoFactory.customerDao().getAll();
     }
+
+
 
 }
