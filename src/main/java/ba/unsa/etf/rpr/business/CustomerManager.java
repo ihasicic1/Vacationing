@@ -20,4 +20,9 @@ public class CustomerManager {
     public void update(Customer customer) throws MyException {
         DaoFactory.customerDao().update(customer);
     }
+
+    public void delete(int id) throws MyException {
+        DaoFactory.customerDao().delete(id);
+    }
+
 }
