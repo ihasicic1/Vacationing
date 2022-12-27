@@ -139,9 +139,9 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </GridPane.margin>
         </HBox>
-      <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+      <HBox alignment="TOP_RIGHT">
          <children>
-            <Button fx:id="minimizeButton" mnemonicParsing="false" onAction="#minimizeAction" prefHeight="52.0" prefWidth="22.0" style="-fx-background-color: #f96167;" text="_" textFill="WHITE">
+            <Button fx:id="minimizeButton" mnemonicParsing="false" onAction="#minimizeAction" prefHeight="52.0" prefWidth="22.0" style="-fx-background-color: #FFFFFF;" text="-">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="-20.0" top="20.0" />
                </HBox.margin>
@@ -149,7 +149,7 @@
                   <Font name="Bookman Old Style Bold" size="12.0" />
                </font>
             </Button>
-            <Button alignment="TOP_CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #f96167;" text="X" textAlignment="RIGHT" textFill="WHITE" fx:id="xButton">
+            <Button alignment="TOP_CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exitAction" style="-fx-background-color: #FFFFFF;" text="X" textAlignment="RIGHT" fx:id="xButton">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

@@ -9,6 +9,10 @@ import java.util.List;
 
 public class TourManager {
 
+    public List<Tour> searchTour(String destination) throws MyException {
+        return DaoFactory.tourDao().searchByDestination(destination);
+    }
+
     public Tour getById(int id) throws MyException {
         return DaoFactory.tourDao().getById(id);
     }
