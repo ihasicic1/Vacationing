@@ -16,4 +16,8 @@ public class CustomerManager {
     public Customer add(Customer customer) throws MyException {
         return DaoFactory.customerDao().add(customer);
     }
+
+    public void update(Customer customer) throws MyException {
+        DaoFactory.customerDao().update(customer);
+    }
 }
