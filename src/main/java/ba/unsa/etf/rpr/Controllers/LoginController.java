@@ -55,5 +55,17 @@ public class LoginController {
 
     }
 
+    public void changeToSignupWin(ActionEvent actionEvent) throws IOException {
+        Stage s = (Stage) emailId.getScene().getWindow();
+        s.close();
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/signUp.fxml"));
+        stage.setTitle("Sign up");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        //primaryStage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+    }
+
 
 }
