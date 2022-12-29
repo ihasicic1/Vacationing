@@ -40,4 +40,20 @@ public class LoginController {
         stage.show();
     }
 
+    @FXML
+    public void initialize(){
+        emailId.textProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue.length() < 5) invalidEmail.setText("Invalid email!");
+            else invalidEmail.setText("");
+
+        });
+
+        passwordId.textProperty().addListener((obs, oldValue, newValue) -> {
+            if(newValue.length() < 8) invalidPassword.setText("Password must contain at least 8 characters!");
+            else invalidPassword.setText("");
+        });
+
+    }
+
+
 }
