@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.Controllers.SignUpController">
+<GridPane prefHeight="529.0" prefWidth="407.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.Controllers.SignUpController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" />
     </columnConstraints>
@@ -31,14 +31,6 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <PasswordField prefColumnCount="0" promptText="Password" GridPane.rowIndex="4">
-            <font>
-                <Font name="Bookman Old Style" size="12.0" />
-            </font>
-            <GridPane.margin>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </GridPane.margin>
-        </PasswordField>
         <Label text="Sign up" textFill="#f96167">
             <font>
                 <Font name="Bookman Old Style" size="17.0" />
@@ -47,46 +39,7 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </GridPane.margin>
         </Label>
-        <TextField promptText="Email" GridPane.rowIndex="3">
-            <GridPane.margin>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </GridPane.margin>
-            <font>
-                <Font name="Bookman Old Style" size="12.0" />
-            </font>
-        </TextField>
-        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #F96167;" text="Sign up  " GridPane.rowIndex="7">
-            <GridPane.margin>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </GridPane.margin>
-            <font>
-                <Font name="Bookman Old Style" size="12.0" />
-            </font>
-        </Button>
-        <HBox alignment="CENTER" GridPane.rowIndex="8">
-            <children>
-                <Label text="Already have an account?">
-                    <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                    </HBox.margin>
-                    <font>
-                        <Font name="Bookman Old Style" size="12.0" />
-                    </font>
-                </Label>
-                <Hyperlink text="Log in" textFill="#f96167" underline="true">
-                    <HBox.margin>
-                        <Insets bottom="20.0" left="-15.0" right="20.0" top="20.0" />
-                    </HBox.margin>
-                    <font>
-                        <Font name="Bookman Old Style" size="12.0" />
-                    </font>
-                </Hyperlink>
-            </children>
-            <GridPane.margin>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </GridPane.margin>
-        </HBox>
-        <TextField promptText="Phone number" GridPane.rowIndex="5">
+        <TextField fx:id="firstNameId" promptText="First name" GridPane.rowIndex="1">
             <font>
                 <Font name="Bookman Old Style" size="12.0" />
             </font>
@@ -94,7 +47,12 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </GridPane.margin>
         </TextField>
-        <TextField promptText="Last name" GridPane.rowIndex="2">
+      <Label fx:id="invalidFirstNameId">
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="180.0" />
+         </GridPane.margin>
+      </Label>
+        <TextField fx:id="lastNameId" promptText="Last name" GridPane.rowIndex="2">
             <font>
                 <Font name="Bookman Old Style" size="12.0" />
             </font>
@@ -102,7 +60,38 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </GridPane.margin>
         </TextField>
-        <TextField promptText="First name" GridPane.rowIndex="1">
+      <Label fx:id="invalidLastNameId">
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="300.0" />
+         </GridPane.margin>
+      </Label>
+        <TextField fx:id="emailId" promptText="Email" GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </GridPane.margin>
+            <font>
+                <Font name="Bookman Old Style" size="12.0" />
+            </font>
+        </TextField>
+      <Label fx:id="invalidEmailId">
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="420.0" />
+         </GridPane.margin>
+      </Label>
+        <PasswordField fx:id="passwordId" prefColumnCount="0" promptText="Password" GridPane.rowIndex="4">
+            <font>
+                <Font name="Bookman Old Style" size="12.0" />
+            </font>
+            <GridPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </GridPane.margin>
+        </PasswordField>
+      <Label fx:id="invalidPasswordId">
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="540.0" />
+         </GridPane.margin>
+      </Label>
+        <TextField fx:id="phoneNumberId" promptText="Phone number" GridPane.rowIndex="5">
             <font>
                 <Font name="Bookman Old Style" size="12.0" />
             </font>
@@ -110,6 +99,11 @@
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </GridPane.margin>
         </TextField>
+      <Label fx:id="invalidNumberId">
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="660.0" />
+         </GridPane.margin>
+      </Label>
         <HBox alignment="CENTER_LEFT" GridPane.rowIndex="6">
             <children>
             <ButtonBar cache="true" prefHeight="40.0" prefWidth="200.0">
@@ -119,7 +113,7 @@
                         <Font name="Bookman Old Style" size="12.0" />
                      </font>
                   </Label>
-                  <RadioButton mnemonicParsing="false" text="Male">
+                  <RadioButton fx:id="maleButton" mnemonicParsing="false" onAction="#pickMaleAction" text="Male">
                      <toggleGroup>
                         <ToggleGroup fx:id="SpolOdabir" />
                      </toggleGroup>
@@ -127,13 +121,50 @@
                         <Font name="Bookman Old Style" size="12.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Female" toggleGroup="$SpolOdabir">
+                  <RadioButton fx:id="femaleButton" mnemonicParsing="false" onAction="#pickFemaleAction" text="Female" toggleGroup="$SpolOdabir">
                      <font>
                         <Font name="Bookman Old Style" size="12.0" />
                      </font>
                   </RadioButton>
                </buttons>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
             </ButtonBar>
+            </children>
+            <GridPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </GridPane.margin>
+        </HBox>
+        <Button fx:id="signUpButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#signUpAction" style="-fx-background-color: #F96167;" text="Sign up  " textFill="WHITE" GridPane.rowIndex="7">
+            <GridPane.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </GridPane.margin>
+            <font>
+                <Font name="Bookman Old Style" size="12.0" />
+            </font>
+        </Button>
+        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="366.0" GridPane.rowIndex="8">
+            <children>
+                <Label text="Already have an account?">
+                    <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font name="Bookman Old Style" size="12.0" />
+                    </font>
+                </Label>
+                <Hyperlink fx:id="loginHyper" onAction="#changeToLogin" text="Log in" textFill="#f96167" underline="true">
+                    <HBox.margin>
+                        <Insets bottom="20.0" left="-15.0" right="20.0" top="20.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font name="Bookman Old Style" size="12.0" />
+                    </font>
+                </Hyperlink>
             </children>
             <GridPane.margin>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
