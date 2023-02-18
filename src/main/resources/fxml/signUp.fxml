@@ -113,7 +113,7 @@
                         <Font name="Bookman Old Style" size="12.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="maleButton" mnemonicParsing="false" onAction="#pickMaleAction" text="Male">
+                  <RadioButton fx:id="maleButton" mnemonicParsing="false" text="Male">
                      <toggleGroup>
                         <ToggleGroup fx:id="SpolOdabir" />
                      </toggleGroup>
@@ -121,7 +121,7 @@
                         <Font name="Bookman Old Style" size="12.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="femaleButton" mnemonicParsing="false" onAction="#pickFemaleAction" text="Female" toggleGroup="$SpolOdabir">
+                  <RadioButton fx:id="femaleButton" mnemonicParsing="false" text="Female" toggleGroup="$SpolOdabir">
                      <font>
                         <Font name="Bookman Old Style" size="12.0" />
                      </font>
