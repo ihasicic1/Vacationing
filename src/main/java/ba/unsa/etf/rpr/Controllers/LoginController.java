@@ -1,5 +1,11 @@
 package ba.unsa.etf.rpr.Controllers;
 
+import ba.unsa.etf.rpr.business.CustomerManager;
+import ba.unsa.etf.rpr.dao.CustomerDao;
+import ba.unsa.etf.rpr.dao.CustomerDaoSQLImpl;
+import ba.unsa.etf.rpr.dao.DaoFactory;
+import ba.unsa.etf.rpr.domain.Customer;
+import ba.unsa.etf.rpr.exceptions.MyException;
 import com.fasterxml.jackson.core.JsonParser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import java.io.IOException;
@@ -16,7 +23,7 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class LoginController {
 
-
+    private final CustomerManager customerManager = new CustomerManager();
     public Hyperlink signUpHyper;
     
     public Label invalidEmail;
@@ -25,35 +32,56 @@ public class LoginController {
     public Button loginButton;
     public TextField emailId;
     public PasswordField passwordId;
+    public static String firstName;
 
     public LoginController(){
     }
 
 
     public void login(ActionEvent actionEvent) throws IOException {
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/adminPanel.fxml"));
-        stage.setTitle("Admin");
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(false);
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
+
+        if(emailId.getText().isEmpty() && passwordId.getText().isEmpty()){
+            invalidEmail.setText("Email field can not be empty!");
+            invalidPassword.setText("Password field can not be empty!");
+        }
+        else if(!emailId.getText().isEmpty() && passwordId.getText().isEmpty()){
+            invalidEmail.setText("");
+            invalidPassword.setText("Password field can not be empty!");
+        }
+        else if(emailId.getText().isEmpty() && !passwordId.getText().isEmpty()){
+            invalidEmail.setText("Email field can not be empty!");
+            invalidPassword.setText("");
+        }
+        else if(!emailId.getText().isEmpty() && !passwordId.getText().isEmpty()){
+            try{
+                if(passwordId.getText().equals(customerManager.getByEmail(emailId.getText()).getPassword())){
+                    if(emailId.getText().equals("ihasicic1@etf.unsa.ba")){
+                        openDialog("AdminPanel", "/fxml/adminPanel.fxml", null);
+                        Stage s = (Stage) loginButton.getScene().getWindow();
+                        s.close();
+                        //dodaj da jedna labela u admin panelu govori welcome "Ilhan"
+                    }
+                    else{
+                        openDialog("UserPanel", "/fxml/userPanel.fxml", null);
+                        //dodaj da jedna labela kaze welcome "first name"
+                        Stage s = (Stage) loginButton.getScene().getWindow();
+                        s.close();
+                    }
+                }
+                else{
+                    invalidPassword.setText("Email or password are not correct!");
+                }
+            } catch (MyException e) {
+                invalidPassword.setText("Email or password are not correct!");
+            }
+        }
+
     }
 
-    @FXML
-    public void initialize(){
-        emailId.textProperty().addListener((obs, oldValue, newValue) -> {
-            if(newValue.length() < 5) invalidEmail.setText("Invalid email!");
-            else invalidEmail.setText("");
-
-        });
-
-        passwordId.textProperty().addListener((obs, oldValue, newValue) -> {
-            if(newValue.length() < 8) invalidPassword.setText("Password must contain at least 8 characters!");
-            else invalidPassword.setText("");
-        });
-
+    public static String getFirstName(){
+        return firstName;
     }
+
 
     public void changeToSignupWin(ActionEvent actionEvent) throws IOException {
         Stage s = (Stage) emailId.getScene().getWindow();
@@ -67,5 +95,18 @@ public class LoginController {
         stage.show();
     }
 
+    private void openDialog(String title, String file, Object controller){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
+            loader.setController(controller);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setTitle(title);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+        }
+    }
 
 }
