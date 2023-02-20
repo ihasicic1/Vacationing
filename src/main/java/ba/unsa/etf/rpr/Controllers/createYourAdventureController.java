@@ -86,8 +86,17 @@ public class createYourAdventureController {
             });
         });
 
+        /**
+         * method that disables all dates before local date of date picker feature
+         */
+        dateId.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
 
-
+                setDisable(empty || date.compareTo(today) < 0 );
+            }
+        });
 
     }
 
