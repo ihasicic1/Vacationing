@@ -36,15 +36,15 @@
                               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ADD" />
                           </items>
                         </ToolBar>
-                        <TableView prefHeight="602.0" prefWidth="710.0">
+                        <TableView fx:id="customerListId" prefHeight="602.0" prefWidth="710.0">
                           <columns>
-                            <TableColumn prefWidth="100.0" text="C1" />
-                            <TableColumn prefWidth="100.0" text="C2" />
-                              <TableColumn prefWidth="100.0" text="Column X" />
-                              <TableColumn prefWidth="100.0" text="Column X" />
-                              <TableColumn prefWidth="100.0" text="Column X" />
-                              <TableColumn prefWidth="108.0" text="Column X" />
-                              <TableColumn prefWidth="100.0" text="Column X" />
+                            <TableColumn fx:id="customerIdColumn" prefWidth="100.0" text="id" />
+                            <TableColumn fx:id="customerFirstNameColumn" prefWidth="100.0" text="first_name" />
+                              <TableColumn fx:id="customerLastNameColumn" prefWidth="100.0" text="last_name" />
+                              <TableColumn fx:id="customerGenderColumn" prefWidth="100.0" text="gender" />
+                              <TableColumn fx:id="customerPhoneNumberColumn" prefWidth="100.0" text="phone_number" />
+                              <TableColumn fx:id="customerEmailColumn" prefWidth="108.0" text="email" />
+                              <TableColumn fx:id="customerPasswordColumn" prefWidth="100.0" text="password" />
                           </columns>
                         </TableView>
                      </children>
@@ -64,13 +64,13 @@
                               <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ADD" />
                           </items>
                         </ToolBar>
-                        <TableView prefHeight="594.0" prefWidth="710.0">
+                        <TableView fx:id="bookingListId" prefHeight="594.0" prefWidth="710.0">
                           <columns>
-                            <TableColumn prefWidth="141.0" text="C1" />
-                            <TableColumn prefWidth="141.0" text="C2" />
-                              <TableColumn prefWidth="141.0" text="Column X" />
-                              <TableColumn prefWidth="141.0" text="Column X" />
-                              <TableColumn prefWidth="141.0" text="Column X" />
+                            <TableColumn fx:id="bookingIdColumn" prefWidth="141.0" text="id" />
+                            <TableColumn fx:id="bookingTicketPriceColumn" prefWidth="141.0" text="ticket_price" />
+                              <TableColumn fx:id="bookingTourIdColumn" prefWidth="141.0" text="tour_id" />
+                              <TableColumn fx:id="bookingCustomerIdColumn" prefWidth="141.0" text="customer_id" />
+                              <TableColumn fx:id="bookingDateColumn" prefWidth="141.0" text="date" />
                           </columns>
                         </TableView>
                      </children>
