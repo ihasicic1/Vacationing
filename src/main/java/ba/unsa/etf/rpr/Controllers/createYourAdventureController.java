@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.Controllers;
 
+import ba.unsa.etf.rpr.business.BookingManager;
 import ba.unsa.etf.rpr.business.TourManager;
+import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Booking;
 import ba.unsa.etf.rpr.domain.Tour;
 import ba.unsa.etf.rpr.exceptions.MyException;
@@ -13,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -28,9 +31,9 @@ public class createYourAdventureController {
     public Button confirmId;
     public Label priceId;
 
-    int currentValue;
 
     TourManager tourManager = new TourManager();
+    BookingManager bookingManager = new BookingManager();
 
     public void chooseDestinationAction(MouseEvent mouseEvent) {
     }
@@ -42,6 +45,36 @@ public class createYourAdventureController {
     }
 
     public void confirmAction(ActionEvent actionEvent) throws MyException {
+        java.sql.Date date = Date.valueOf(dateId.getValue());
+
+        if(destinationId.getValue().isEmpty() || priceId.getText().isEmpty() || dateId.getValue() == null || numberOfTicketsId.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Field can not be empty!");
+        }
+        else{
+            Booking booking = new Booking();
+            booking.setTourId(tourManager.searchByDestination(destinationId.getValue()).getId());
+            booking.setTicket_price(Double.valueOf(priceId.getText()));
+            booking.setCustomerId(DaoFactory.customerDao().getByEmail(LoginController.getEmail()).getId());
+            booking.setDate(date);
+            try{
+                bookingManager.add(booking);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Congratulations!");
+                alert.setHeaderText(null);
+                alert.setContentText("Your tickets to " + destinationId.getValue() + " have been booked!");
+                alert.showAndWait();
+                Stage s = (Stage) destinationId.getScene().getWindow();
+                s.close();
+                openDialog("User Panel", "/fxml/userPanel.fxml", null);
+            } catch (Exception e){
+                throw new MyException(e.getMessage(), e);
+            }
+
+        }
+
 
     }
 
