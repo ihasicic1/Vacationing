@@ -10,7 +10,6 @@ import ba.unsa.etf.rpr.exceptions.MyException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,8 +20,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-
-import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class AdminPanelController {
 
@@ -156,11 +153,31 @@ public class AdminPanelController {
 
     public void deleteCustomerAction(ActionEvent actionEvent) throws MyException {
         Customer customer = (Customer) customerListId.getSelectionModel().getSelectedItem();
-        if(customer != null){
+        List<Booking> bookingList = bookingManager.getAll();
+        if(customer != null && !checkBooking(bookingList, customer.getId())){
             customerManager.delete(customer.getId());
             refreshCustomers();
         }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error!");
+            alert.setContentText("You can not delete a customer with booked destination!");
+            alert.showAndWait();
+        }
+    }
 
+    /**
+     * method for checking if a customer that is set to be deleted has a destination booked
+     * @param bookingList
+     * @param id
+     * @return
+     * @throws MyException
+     */
+    public static boolean checkBooking(List<Booking> bookingList, int id) throws MyException {
+        for(Booking b: bookingList){
+            if(b.getCustomerId() == id) return true;
+        }
+        return false;
     }
 
     public void addCustomerAction(ActionEvent actionEvent) throws MyException {
@@ -185,6 +202,9 @@ public class AdminPanelController {
 
 
     public void addBookingAction(ActionEvent actionEvent) {
+        openDialog("Add Customer", "/fxml/addBookingPanel.fxml", null);
+        Stage s = (Stage) bookingsAddButtonId.getScene().getWindow();
+        s.close();
     }
 
     public void deleteBookingAction(ActionEvent actionEvent) throws MyException {
@@ -196,6 +216,9 @@ public class AdminPanelController {
     }
 
     public void addTourAction(ActionEvent actionEvent) {
+        openDialog("Add Customer", "/fxml/addTourPanel.fxml", null);
+        Stage s = (Stage) toursAddButtonId.getScene().getWindow();
+        s.close();
     }
 
     public void deleteTourAction(ActionEvent actionEvent) throws MyException {
