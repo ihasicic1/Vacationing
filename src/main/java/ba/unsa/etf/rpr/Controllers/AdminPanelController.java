@@ -198,6 +198,11 @@ public class AdminPanelController {
     public void addTourAction(ActionEvent actionEvent) {
     }
 
-    public void deleteTourAction(ActionEvent actionEvent) {
+    public void deleteTourAction(ActionEvent actionEvent) throws MyException {
+        Tour tour = (Tour) toursListId.getSelectionModel().getSelectedItem();
+        if(tour != null){
+            tourManager.delete(tour.getId());
+            refreshTours();
+        }
     }
 }
