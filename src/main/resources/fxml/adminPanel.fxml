@@ -32,8 +32,8 @@
                      <children>
                         <ToolBar prefHeight="40.0" prefWidth="200.0">
                           <items>
-                            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ALL" />
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ADD" />
+                              <Button fx:id="customersAddButtonId" mnemonicParsing="false" onAction="#addCustomerAction" prefHeight="26.0" prefWidth="75.0" text="ADD" />
+                            <Button fx:id="customersDeleteButtonId" mnemonicParsing="false" onAction="#deleteCustomerAction" prefHeight="26.0" prefWidth="75.0" text="DELETE" />
                           </items>
                         </ToolBar>
                         <TableView fx:id="customerListId" prefHeight="602.0" prefWidth="710.0">
@@ -60,8 +60,8 @@
                      <children>
                         <ToolBar prefHeight="40.0" prefWidth="200.0">
                           <items>
-                            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ALL" />
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ADD" />
+                              <Button fx:id="bookingsAddButtonId" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ADD" />
+                            <Button fx:id="bookingsDeleteButtonId" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="DELETE" />
                           </items>
                         </ToolBar>
                         <TableView fx:id="bookingListId" prefHeight="594.0" prefWidth="710.0">
@@ -85,8 +85,8 @@
                            <children>
                               <ToolBar prefHeight="40.0" prefWidth="200.0">
                                 <items>
-                                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ALL" />
-                                    <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ADD" />
+                                    <Button fx:id="toursAddButtonId" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="ADD" />
+                                  <Button fx:id="toursDeleteButtonId" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="DELETE" />
                                 </items>
                               </ToolBar>
                               <TableView fx:id="toursListId" prefHeight="589.0" prefWidth="710.0">

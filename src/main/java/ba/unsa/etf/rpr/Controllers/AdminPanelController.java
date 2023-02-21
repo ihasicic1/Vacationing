@@ -20,6 +20,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
@@ -53,6 +54,12 @@ public class AdminPanelController {
     public TableColumn<Customer, String> customerPhoneNumberColumn;
     public TableColumn<Customer, String> customerEmailColumn;
     public TableColumn<Customer, String> customerPasswordColumn;
+    public Button customersAddButtonId;
+    public Button customersDeleteButtonId;
+    public Button bookingsAddButtonId;
+    public Button bookingsDeleteButtonId;
+    public Button toursAddButtonId;
+    public Button toursDeleteButtonId;
 
     TourManager tourManager = new TourManager();
     BookingManager bookingManager = new BookingManager();
@@ -145,5 +152,34 @@ public class AdminPanelController {
         }catch (Exception e){
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
+    }
+
+    public void deleteCustomerAction(ActionEvent actionEvent) throws MyException {
+        Customer customer = (Customer) customerListId.getSelectionModel().getSelectedItem();
+        if(customer != null){
+            customerManager.delete(customer.getId());
+            refreshCustomers();
+        }
+
+    }
+
+    public void addCustomerAction(ActionEvent actionEvent) throws MyException {
+        openDialog("Add Customer", "/fxml/addCustomerPanel.fxml", null);
+        Stage s = (Stage) customersAddButtonId.getScene().getWindow();
+        s.close();
+    }
+
+    public static boolean checkPhoneNumber(List<Customer> customerList, String phoneNumber){
+        for(Customer c: customerList){
+            if(c.getPhone_number().equals(phoneNumber)) return true;
+        }
+        return false;
+    }
+
+    public static boolean checkEmail(List<Customer> customerList, String email){
+        for(Customer c: customerList){
+            if(c.getEmail().equals(email)) return true;
+        }
+        return false;
     }
 }
