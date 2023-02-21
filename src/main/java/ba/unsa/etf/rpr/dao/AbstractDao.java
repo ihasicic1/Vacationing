@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exceptions.MyException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -14,27 +13,42 @@ import java.util.*;
  * @author Ilhan Hasicic
  */
 public abstract class AbstractDao <Type extends Idable> implements Dao<Type> {
-    private Connection connection;
+    private static Connection connection = null;
     private String tableName;
 
     public AbstractDao(String tableName){
-        try {
-            FileReader reader = new FileReader("db.properties");
-            this.tableName = tableName;
-            Properties p = new Properties();
-            p.load(reader);
-            this.connection = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(0);
+        this.tableName = tableName;
+        createConnection();
+    }
+
+    private static void createConnection(){
+        if(connection == null){
+            try{
+                FileReader reader = new FileReader("db.properties");
+                Properties p = new Properties();
+                p.load(reader);
+                connection = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"), p.getProperty("password"));
+            }catch(SQLException | IOException e){
+                System.out.println("Unable to connect to the database");
+                e.printStackTrace();
+            }
+            finally {
+                Runtime.getRuntime().addShutdownHook(new Thread(){
+                    @Override
+                    public void run(){
+                        try {
+                            connection.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
         }
-
     }
 
-    public Connection getConnection(){ return this.connection; }
-    public void setConnection(Connection connection){
-        this.connection = connection;
-    }
+    public Connection getConnection(){ return connection; }
+
 
     /**
      * Method for maping ResultSet into Object
