@@ -182,4 +182,22 @@ public class AdminPanelController {
         }
         return false;
     }
+
+
+    public void addBookingAction(ActionEvent actionEvent) {
+    }
+
+    public void deleteBookingAction(ActionEvent actionEvent) throws MyException {
+        Booking booking = (Booking) bookingListId.getSelectionModel().getSelectedItem();
+        if(booking != null){
+            bookingManager.delete(booking.getId());
+            refreshBookings();
+        }
+    }
+
+    public void addTourAction(ActionEvent actionEvent) {
+    }
+
+    public void deleteTourAction(ActionEvent actionEvent) {
+    }
 }
