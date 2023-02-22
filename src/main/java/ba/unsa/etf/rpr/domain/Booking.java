@@ -12,9 +12,9 @@ public class Booking implements Idable {
     private int id;
     private Double ticket_price;
 
-    private Tour tour;
+    private Tour tour_id;
 
-    private Customer customer;
+    private int customer_id;
 
     private Date date;
 
@@ -35,20 +35,20 @@ public class Booking implements Idable {
         this.ticket_price = ticket_price;
     }
 
-    public Tour getTour() {
-        return tour;
+    public Tour getTourId() {
+        return tour_id;
     }
 
-    public void setTour(Tour tour) {
-        this.tour = tour;
+    public void setTourId(Tour tour_id) {
+        this.tour_id = tour_id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public int getCustomerId() {
+        return customer_id;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(int customer_id) {
+        this.customer_id = customer_id;
     }
 
     public Date getDate() {
@@ -64,12 +64,12 @@ public class Booking implements Idable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return id == booking.id && Objects.equals(ticket_price, booking.ticket_price) && Objects.equals(tour, booking.tour) && Objects.equals(customer, booking.customer) && Objects.equals(date, booking.date);
+        return id == booking.id && tour_id == booking.tour_id && customer_id == booking.customer_id && Objects.equals(ticket_price, booking.ticket_price) && Objects.equals(date, booking.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ticket_price, tour, customer, date);
+        return Objects.hash(id, ticket_price, tour_id, customer_id, date);
     }
 
     @Override
@@ -77,8 +77,8 @@ public class Booking implements Idable {
         return "Booking{" +
                 "id=" + id +
                 ", ticket_price=" + ticket_price +
-                ", tour_id=" + tour +
-                ", customer_id=" + customer +
+                ", tour_id=" + tour_id +
+                ", customer_id=" + customer_id +
                 ", date=" + date +
                 '}';
     }

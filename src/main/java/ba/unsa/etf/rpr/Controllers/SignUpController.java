@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.business.CustomerManager;
-import ba.unsa.etf.rpr.dao.CustomerDaoSQLImpl;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Customer;
 import ba.unsa.etf.rpr.exceptions.MyException;
@@ -22,7 +21,7 @@ import java.util.regex.Pattern;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class SignUpController {
-    private final CustomerManager customerManager = new CustomerManager();
+    private static final CustomerManager customerManager = new CustomerManager();
     public Button xButton;
     public Button minimizeButton;
     public TextField firstNameId;
@@ -78,7 +77,7 @@ public class SignUpController {
         stage.show();
     }
 
-    public boolean checkEmail(String emailField){
+    public static boolean checkEmail(String emailField){
         String regex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
@@ -86,6 +85,16 @@ public class SignUpController {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(emailField);
         return matcher.matches();
+    }
+
+    public static boolean checkPhoneNumber(String phoneNumber) throws MyException {
+        List<Customer> customerList = customerManager.getAll();
+        for(Customer c: customerList){
+            if(c.getPhone_number().equals(phoneNumber)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void signUpAction(ActionEvent actionEvent) throws MyException {
@@ -97,7 +106,7 @@ public class SignUpController {
                 sameEmail = true;
                 break;
             }
-            else if(c.getPhone_number().equals(phoneNumberId.getText())){
+            else if(!checkPhoneNumber(phoneNumberId.getText())){
                 samePhoneNumber = true;
                 break;
             }
@@ -177,8 +186,6 @@ public class SignUpController {
                 throw new MyException(ex.getMessage(), ex);
             }
         }
-
-
     }
 
     private void openDialog(String title, String file, Object controller){

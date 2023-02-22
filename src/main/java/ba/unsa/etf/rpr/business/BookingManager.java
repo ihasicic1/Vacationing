@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.business;
 
-import ba.unsa.etf.rpr.dao.Dao;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Booking;
 import ba.unsa.etf.rpr.domain.Customer;
@@ -11,8 +10,8 @@ import java.util.List;
 
 public class BookingManager {
 
-    public Booking searchByCustomer(Customer customer) throws MyException, IOException {
-        return DaoFactory.bookingDao().getById(customer.getId());
+    public List<Booking> searchByCustomer(Customer customer) throws MyException, IOException {
+        return DaoFactory.bookingDao().searchByCustomer(customer);
     }
 
     public Booking getById(int id) throws MyException {

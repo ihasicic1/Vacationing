@@ -1,8 +1,8 @@
 package ba.unsa.etf.rpr.Controllers;
 
 import ba.unsa.etf.rpr.business.BookingManager;
+import ba.unsa.etf.rpr.business.TourManager;
 import ba.unsa.etf.rpr.domain.Booking;
-import ba.unsa.etf.rpr.domain.Customer;
 import ba.unsa.etf.rpr.exceptions.MyException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +19,13 @@ import java.util.List;
 public class AddBookingController {
     public TextField ticketPriceId;
     public TextField tourId;
-    public TextField dateId;
     public TextField customerId;
     public Button cancelButtonId;
     public Button confirmButtonId;
     public DatePicker datePickerId;
 
     BookingManager bookingManager = new BookingManager();
+    TourManager tourManager = new TourManager();
     public void confirmAction(ActionEvent actionEvent) throws MyException {
         List<Booking> bookingList = bookingManager.getAll();
         if(ticketPriceId.getText().isEmpty() || tourId.getText().isEmpty() || customerId.getText().isEmpty() || datePickerId.getValue() == null){
@@ -38,12 +38,12 @@ public class AddBookingController {
             Booking booking = new Booking();
             java.sql.Date date = Date.valueOf(datePickerId.getValue());
             booking.setTicket_price(Double.valueOf(ticketPriceId.getText()));
-            booking.setTourId(Integer.parseInt(tourId.getText()));
+            booking.setTourId(tourManager.searchByDestination(tourId.getText()));
             booking.setCustomerId(Integer.parseInt(customerId.getText()));
             booking.setDate(date);
             bookingManager.add(booking);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("You have successfully added new customer!");
+            alert.setContentText("You have successfully added new booking!");
             alert.setHeaderText(null);
             alert.showAndWait();
             Stage s = (Stage) confirmButtonId.getScene().getWindow();

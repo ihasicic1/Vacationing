@@ -40,6 +40,26 @@ public class CustomerDaoSQLImpl extends AbstractDao<Customer> implements Custome
     }
 
     @Override
+    public Customer getByEmail(String email) throws MyException {
+        Customer customer = new Customer();
+        try{
+            PreparedStatement statement = this.getConnection().prepareStatement("SELECT * FROM Customers WHERE email = ?");
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+
+            if(rs.next()){
+                customer = row2object(rs);
+                rs.close();
+            }
+
+        }catch (SQLException e){
+            throw new MyException(e.getMessage(),e);
+        }
+
+        return customer;
+    }
+
+    @Override
     public Customer row2object(ResultSet rs) throws MyException {
         try {
             Customer customer = new Customer();

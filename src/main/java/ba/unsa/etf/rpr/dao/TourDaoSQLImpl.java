@@ -22,6 +22,7 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
             Tour tour = new Tour();
             tour.setId(rs.getInt(1));
             tour.setDestination(rs.getString(2));
+            tour.setPrice(rs.getDouble(3));
             return tour;
         } catch (Exception e) {
             throw new MyException(e.getMessage(), e);
@@ -33,12 +34,13 @@ public class TourDaoSQLImpl extends AbstractDao<Tour> implements TourDao {
         Map<String, Object> item = new TreeMap<>();
         item.put("id", object.getId());
         item.put("destination", object.getDestination());
+        item.put("price", object.getPrice());
         return item;
     }
 
 
     @Override
-    public List<Tour> searchByDestination(String destination) throws MyException {
-        return executeQuery("SELECT * FROM Tours WHERE destination = ?", new Object[]{destination});
+    public Tour searchByDestination(String destination) throws MyException {
+        return executeQueryUnique("SELECT * FROM Tours WHERE destination = ?", new Object[]{destination});
     }
 }

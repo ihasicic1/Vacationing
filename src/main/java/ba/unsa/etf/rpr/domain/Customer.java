@@ -16,14 +16,17 @@ public class Customer implements Idable{
     private String email;
     private String password;
 
-    public Customer() {
-        this.id = id;
+    public Customer(String first_name, String last_name, String gender, String phone_number, String email, String password) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;
         this.phone_number = phone_number;
         this.email = email;
         this.password = password;
+    }
+
+    public Customer(){
+
     }
 
 

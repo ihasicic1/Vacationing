@@ -6,7 +6,6 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Booking;
 import ba.unsa.etf.rpr.domain.Tour;
 import ba.unsa.etf.rpr.exceptions.MyException;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,10 +18,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-import static ba.unsa.etf.rpr.Controllers.LoginController.email;
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
-public class createYourAdventureController {
+public class CreateYourAdventureController {
 
     public ChoiceBox<String> destinationId;
     public Spinner<Integer> numberOfTicketsId;
@@ -45,17 +43,18 @@ public class createYourAdventureController {
     }
 
     public void confirmAction(ActionEvent actionEvent) throws MyException {
-        java.sql.Date date = Date.valueOf(dateId.getValue());
-
-        if(destinationId.getValue().isEmpty() || priceId.getText().isEmpty() || dateId.getValue() == null || numberOfTicketsId.getValue() == null){
+        if(destinationId.getValue() == null || priceId.getText().isEmpty() || dateId.getValue() == null || numberOfTicketsId.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Field can not be empty!");
+            alert.show();
         }
+
         else{
+            java.sql.Date date = Date.valueOf(dateId.getValue());
             Booking booking = new Booking();
-            booking.setTourId(tourManager.searchByDestination(destinationId.getValue()).getId());
+            booking.setTourId(tourManager.searchByDestination(destinationId.getValue()));
             booking.setTicket_price(Double.valueOf(priceId.getText()));
             booking.setCustomerId(DaoFactory.customerDao().getByEmail(LoginController.getEmail()).getId());
             booking.setDate(date);
@@ -120,14 +119,22 @@ public class createYourAdventureController {
         });
 
         /**
-         * method that disables all dates before local date of date picker feature
+         * disables all dates before local date of date picker feature
          */
         dateId.setDayCellFactory(picker -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                LocalDate today = LocalDate.now();
-
-                setDisable(empty || date.compareTo(today) < 0 );
+                if(date != null){
+                    super.updateItem(date, empty);
+                    LocalDate today = LocalDate.now();
+                    setDisable(empty || date.compareTo(today) < 0);
+                }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Field can not be empty!");
+                    alert.show();
+                }
             }
         });
 

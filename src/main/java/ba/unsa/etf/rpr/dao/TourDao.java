@@ -15,5 +15,5 @@ public interface TourDao extends Dao<Tour>{
      * @param destination
      * @return list of a tour because city = location = tour
      */
-    List<Tour> searchByDestination(String destination) throws MyException;
+    Tour searchByDestination(String destination) throws MyException;
 }

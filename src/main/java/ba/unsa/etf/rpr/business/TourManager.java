@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TourManager {
 
-    public List<Tour> searchTour(String destination) throws MyException {
+    public Tour searchByDestination(String destination) throws MyException {
         return DaoFactory.tourDao().searchByDestination(destination);
     }
 

@@ -32,7 +32,7 @@ public class LoginController {
     public Button loginButton;
     public TextField emailId;
     public PasswordField passwordId;
-    public static String firstName;
+    public static String email;
 
     public LoginController(){
     }
@@ -63,6 +63,7 @@ public class LoginController {
                     }
                     else{
                         openDialog("UserPanel", "/fxml/userPanel.fxml", null);
+                        email = emailId.getText();
                         //dodaj da jedna labela kaze welcome "first name"
                         Stage s = (Stage) loginButton.getScene().getWindow();
                         s.close();
@@ -78,8 +79,8 @@ public class LoginController {
 
     }
 
-    public static String getFirstName(){
-        return firstName;
+    public static String getEmail(){
+        return email;
     }
 
 

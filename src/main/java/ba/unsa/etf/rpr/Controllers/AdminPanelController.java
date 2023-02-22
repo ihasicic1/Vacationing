@@ -161,7 +161,7 @@ public class AdminPanelController {
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error!");
-            alert.setContentText("You can not delete a customer with booked destination!");
+            alert.setContentText("You can not delete a customer with booked destination! Delete bookings first!");
             alert.showAndWait();
         }
     }

@@ -39,6 +39,8 @@ public class CustomerManager {
         return DaoFactory.customerDao().getAll();
     }
 
-
+    public Customer getByEmail(String email) throws MyException {
+        return DaoFactory.customerDao().getByEmail(email);
+    }
 
 }
