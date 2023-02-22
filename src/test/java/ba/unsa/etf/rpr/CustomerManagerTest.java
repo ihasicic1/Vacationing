@@ -49,6 +49,47 @@ public class CustomerManagerTest {
         customerManager.delete(customerManager.getByEmail("lik@gmail.com").getId());
     }
 
+    @Test
+    void searchByFirstNameTest() throws MyException {
+        Customer customer1 = customerManager.add(createCustomer1());
+        boolean isValid = false;
+        if(customerManager.searchCustomersByFirstName("Lik1").size() == 1) isValid = true;
+        Assertions.assertTrue(isValid);
+        customerManager.delete(customer1.getId());
+    }
+
+    @Test
+    void searchByLastNameTest() throws MyException {
+        Customer customer2 = customerManager.add(createCustomer2());
+        boolean isValid = false;
+        if(customerManager.searchCustomersByLastName("Likic2").size() == 1) isValid = true;
+        Assertions.assertTrue(isValid);
+        customerManager.delete(customer2.getId());
+    }
+
+    private Customer createCustomer1(){
+        Customer customer = new Customer();
+        customer.setFirst_name("Lik1");
+        customer.setLast_name("Likic1");
+        customer.setGender("M");
+        customer.setPhone_number("062555444");
+        customer.setEmail("lik1@gmail.com");
+        customer.setPassword("lik12345");
+        return customer;
+    }
+
+    private Customer createCustomer2(){
+        Customer customer = new Customer();
+        customer.setFirst_name("Lik2");
+        customer.setLast_name("Likic2");
+        customer.setGender("M");
+        customer.setPhone_number("062555444");
+        customer.setEmail("lik2@gmail.com");
+        customer.setPassword("lik12345");
+        return customer;
+    }
+
+
     private Customer createCustomer(){
         Customer customer = new Customer();
         customer.setFirst_name("Lik");
